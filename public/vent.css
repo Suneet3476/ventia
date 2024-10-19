@@ -1,30 +1,28 @@
 /* Universal Styles */
-.signout-section {
-  margin-top: 50px; /* Extra space to separate it from other sidebar items */
-  padding: 20px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separator line */
-}
 
-.signout-button {
-  width: 100%;
-  background-color: #ff4444;
+
+/* Popup Styles */
+.popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00a2ff;
   color: white;
-  padding: 15px;
-  border: none;
+  padding: 15px 30px;
   border-radius: 25px;
-  text-align: left;
-  cursor: pointer;
   font-size: 1.2rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 3s ease-in-out;
 }
 
-.signout-button:hover {
-  background-color: #ff6666;
-  transform: scale(1.05);
+/* Keyframes for Popup Animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
+
 
 
 
