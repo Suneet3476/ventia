@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Profile | Ventia</title>
+  <link rel="stylesheet" href="styles/profile.css">
+  <script defer src="scripts/profile.js"></script>
+</head>
+<body>
+  <div class="background-shapes"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Ventia</h2>
+      <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li><a href="vent.html"><i class="fas fa-bullhorn"></i> Vent</a></li>
+        <li><a href="listen.html"><i class="fas fa-headphones-alt"></i> Listen</a></li>
+        <li><a href="journal.html"><i class="fas fa-book"></i> Journal</a></li>
+        <li><a href="mood.html"><i class="fas fa-smile"></i> Mood Check-in</a></li>
+        <li><a href="chatbot.html"><i class="fas fa-robot"></i> Chatbot</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Sidebar Restore Button -->
+  <button class="sidebar-restore"><i class="fas fa-arrow-right"></i></button>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header>
+      <h1>Your Profile</h1>
+      <p>Update your details and personalize your Ventia experience.</p>
+    </header>
+
+    <section class="profile-details">
+      <div class="profile-card">
+        <h2>Profile Information</h2>
+        <form id="profile-form">
+          <label for="username">Username</label>
+          <input type="text" id="username" value="Anonymous123" disabled>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" value="youremail@ventia.com">
+
+          <label for="bio">Bio</label>
+          <textarea id="bio" rows="4" placeholder="Tell us about yourself...">Your bio here...</textarea>
+
+          <label for="profile-pic">Profile Picture</label>
+          <input type="file" id="profile-pic" accept="image/*">
+
+          <button type="submit" class="btn-save">Save Changes</button>
+        </form>
+      </div>
+
+      <div class="security-settings">
+        <h2>Security Settings</h2>
+        <form id="security-form">
+          <label for="current-password">Current Password</label>
+          <input type="password" id="current-password" placeholder="Enter current password">
+
+          <label for="new-password">New Password</label>
+          <input type="password" id="new-password" placeholder="Enter new password">
+
+          <button type="submit" class="btn-save">Update Password</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="account-actions">
+      <h2>Account Actions</h2>
+      <button class="btn-danger">Delete Account</button>
+    </section>
+  </div>
+</body>
+</html>
