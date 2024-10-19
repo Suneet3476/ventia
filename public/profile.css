@@ -1,0 +1,149 @@
+/* Universal Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #100d28;
+  color: white;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* Background Shapes */
+.background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  opacity: 0.1;
+  z-index: -1;
+  animation: background-move 20s infinite linear;
+}
+
+@keyframes background-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  transition: all 0.4s ease;
+}
+
+/* Sidebar Header */
+.sidebar-header h2 {
+  font-size: 2rem;
+  color: #ff00e2;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #ff00e2;
+}
+
+header p {
+  color: #bbb;
+  margin-top: 10px;
+}
+
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+  margin-top: 40px;
+}
+
+.profile-card, .security-settings {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  flex: 1;
+}
+
+h2 {
+  color: #ff00e2;
+  margin-bottom: 20px;
+}
+
+/* Form Styling */
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+input, textarea {
+  background: #1a1a3c;
+  border: none;
+  padding: 10px;
+  margin-bottom: 20px;
+  color: #fff;
+  border-radius: 10px;
+}
+
+input[type="file"] {
+  background: none;
+  margin-top: 10px;
+}
+
+.btn-save {
+  background-color: #ff00e2;
+  padding: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #00a2ff;
+  transform: scale(1.05);
+}
+
+.account-actions {
+  margin-top: 40px;
+}
+
+.btn-danger {
+  background-color: #ff4444;
+  padding: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #ff6666;
+  transform: scale(1.05);
+}
