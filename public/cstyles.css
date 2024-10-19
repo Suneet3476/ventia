@@ -115,27 +115,8 @@ body {
   max-width: 800px;
 }
 
-.values-hero h1 {
-  font-size: 3rem;
-  margin-bottom: 10px;
+.values-hero h1, .values-hero p {
   animation: fadeIn 2s ease-in-out;
-}
-
-.values-hero p {
-  font-size: 1.5rem;
-  opacity: 0.8;
-  animation: fadeIn 2s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 /* Core Values Section */
@@ -150,54 +131,101 @@ body {
   color: var(--primary-color);
 }
 
+/* Glassmorphism Cards */
 .values-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 40px;
 }
 
 .value-item {
-  background: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   padding: 30px;
   border-radius: 15px;
+  text-align: center;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  text-align: center;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.8;
+}
+
+.value-item h3, .value-item p {
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .value-item i {
-  font-size: 2.5rem;
-  margin-bottom: 15px;
+  font-size: 3rem;
+  margin-bottom: 20px;
   color: var(--primary-color);
+  transition: transform 0.3s ease;
 }
 
-.value-item h3 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: var(--primary-color);
+.value-item:hover i {
+  transform: scale(1.2);
 }
 
-.value-item p {
-  color: #555;
+.value-item:hover h3, .value-item:hover p {
+  opacity: 1;
 }
 
 .value-item:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  transform: translateY(-15px);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2);
 }
 
-/* Scroll Reveal Animation */
-.scroll-reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  animation: reveal 1.5s ease forwards;
+/* Mental Health Awareness Section */
+.mental-health {
+  padding: 80px 5%;
+  background-color: #f9f9f9;
+  text-align: center;
 }
 
-@keyframes reveal {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.mental-health h2 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+}
+
+.mental-health p {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+}
+
+.graphs-container {
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 50px;
+}
+
+.graph {
+  text-align: center;
+}
+
+.graph img {
+  max-width: 100%;
+  height: auto;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.emotional-message {
+  background-color: white;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.emotional-message h2 {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.emotional-message p {
+  font-size: 1.2rem;
 }
 
 /* Footer */
@@ -216,6 +244,11 @@ footer {
 
   .values-hero p {
     font-size: 1.2rem;
+  }
+
+  .graphs-container {
+    flex-direction: column;
+    gap: 30px;
   }
 }
 
