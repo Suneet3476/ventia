@@ -1,13 +1,18 @@
 // Sidebar toggle functionality
 const sidebar = document.querySelector('.sidebar');
 const toggleSidebarButton = document.querySelector('.toggle-sidebar');
+const sidebarRestoreButton = document.querySelector('.sidebar-restore');
 
 toggleSidebarButton.addEventListener('click', () => {
   sidebar.classList.toggle('collapsed');
   document.querySelector('.main-content').classList.toggle('expanded');
 });
 
-// Button functionality (same as before)
+sidebarRestoreButton.addEventListener('click', () => {
+  sidebar.classList.remove('collapsed');
+});
+
+// Button functionality
 document.getElementById('vent-button').addEventListener('click', () => {
   alert('Venting session started!');
 });
