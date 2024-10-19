@@ -4,62 +4,77 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ventia | Emotional Well-being</title>
-  <link rel="stylesheet" href="styles/main.css">
-  <script src="scripts/main.js" defer></script>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header class="header">
-    <nav class="navbar">
-      <div class="logo">Ventia</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="values.html">Our Values</a></li>
-        <li><a href="login.html">Login / Signup</a></li>
-      </ul>
-    </nav>
+  <header class="navbar">
+    <div class="logo">Ventia</div>
+    <ul class="nav-links">
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Our Values</a></li>
+      <li><a href="login.html">Login/Signup</a></li>
+    </ul>
   </header>
 
   <section class="hero">
-    <div class="hero-text">
-      <h1>Welcome to Ventia</h1>
-      <p>Your mental health matters, and we are here to help.</p>
+    <div class="hero-content">
+      <h1>Welcome to <span class="highlight">Ventia</span></h1>
+      <p>Your mental health matters. Join us and take the first step toward emotional well-being.</p>
       <a href="login.html" class="cta-btn">Get Started</a>
     </div>
   </section>
 
   <section class="features">
-    <h2>Our Core Features</h2>
-    <div class="feature-cards">
+    <h2>Why Choose Ventia?</h2>
+    <div class="feature-grid">
       <div class="card">
-        <i class="icon">&#128172;</i>
-        <h3>Anonymous Venting</h3>
-        <p>Express your thoughts anonymously in a safe space.</p>
+        <i class="fas fa-comments"></i>
+        <h3>Anonymous Chat</h3>
+        <p>Express yourself freely in a safe, judgment-free environment.</p>
       </div>
       <div class="card">
-        <i class="icon">&#128187;</i>
-        <h3>AI Emotional Support</h3>
-        <p>Talk to our AI, always ready to listen and provide comfort.</p>
+        <i class="fas fa-headphones"></i>
+        <h3>Listen & Support</h3>
+        <p>Be a listener or connect with people who understand your journey.</p>
       </div>
       <div class="card">
-        <i class="icon">&#128104;&#8205;&#128104;&#8205;&#128103;&#8205;&#128103;</i>
+        <i class="fas fa-robot"></i>
+        <h3>AI Support 24/7</h3>
+        <p>Our AI-powered chatbot is always available to listen and assist.</p>
+      </div>
+      <div class="card">
+        <i class="fas fa-users"></i>
         <h3>Community Events</h3>
-        <p>Join our forums and participate in engaging wellness activities.</p>
+        <p>Engage in real-world activities like yoga, mindfulness, and more.</p>
       </div>
     </div>
   </section>
 
   <section class="testimonials">
-    <h2>What People Say</h2>
+    <h2>What Our Users Say</h2>
     <div class="carousel">
-      <div class="testimonial">"Ventia changed my life. It's a safe haven." – User A</div>
-      <div class="testimonial">"The AI support is always there when I need it." – User B</div>
-      <div class="testimonial">"I love the sense of community here." – User C</div>
+      <div class="testimonial">
+        <p>"Ventia has been a lifeline for me during tough times."</p>
+        <span>- Alex</span>
+      </div>
+      <div class="testimonial">
+        <p>"I love the anonymous support. It feels safe and freeing."</p>
+        <span>- Maria</span>
+      </div>
+      <div class="testimonial">
+        <p>"The AI chatbot is surprisingly comforting!"</p>
+        <span>- John</span>
+      </div>
     </div>
   </section>
 
-  <footer class="footer">
+  <footer>
     <p>&copy; 2024 Ventia | All Rights Reserved</p>
   </footer>
+
+  <script src="scripts.js"></script>
 </body>
 </html>
