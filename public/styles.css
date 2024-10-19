@@ -7,20 +7,10 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f3f4f6;
+  background: linear-gradient(135deg, #eef2f3, #8c9eff);
   color: #333;
   line-height: 1.6;
   overflow-x: hidden;
-}
-
-h1, h2 {
-  text-align: center;
-  margin-bottom: 1rem;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
 }
 
 /* Navbar */
@@ -28,7 +18,7 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #5a4fcf;
+  background-color: #000;
   padding: 1rem 5%;
   position: fixed;
   width: 100%;
@@ -42,26 +32,31 @@ a {
   font-weight: 600;
 }
 
-.navbar .nav-links {
+.nav-links {
   display: flex;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
-.nav-links a {
+.nav-btn {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
   color: #fff;
   font-weight: 500;
-  transition: color 0.3s;
+  border: none;
+  transition: background 0.3s, transform 0.3s;
 }
 
-.nav-links a:hover {
-  color: #e0e0e0;
+.nav-btn:hover {
+  background: #00c8ff;
+  transform: scale(1.1);
 }
 
 /* Hero Section */
 .hero {
   height: 100vh;
-  background: linear-gradient(to right, #5a4fcf, #8b78e6);
-  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -73,21 +68,21 @@ a {
   margin-bottom: 1rem;
 }
 
-.hero-content .highlight {
-  color: #ffcc00;
+.highlight {
+  color: #00c8ff;
 }
 
 .cta-btn {
-  background-color: #ffcc00;
-  color: #333;
-  padding: 0.8rem 2rem;
+  margin-top: 2rem;
+  background-color: #00c8ff;
+  padding: 1rem 2.5rem;
   border-radius: 25px;
   font-weight: 600;
   transition: background-color 0.3s;
 }
 
 .cta-btn:hover {
-  background-color: #ffb300;
+  background-color: #00b8e6;
 }
 
 /* Features Section */
@@ -102,18 +97,12 @@ a {
 }
 
 .card {
-  background-color: white;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
   transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.card i {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  color: #5a4fcf;
+  text-align: center;
 }
 
 .card:hover {
@@ -136,26 +125,46 @@ a {
 
 .testimonial {
   min-width: 300px;
-  background-color: white;
+  background: rgba(255, 255, 255, 0.8);
   padding: 2rem;
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 2s;
 }
 
-.testimonial p {
-  margin-bottom: 1rem;
-  font-style: italic;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.testimonial span {
-  font-weight: bold;
-  color: #5a4fcf;
-}
-
-/* Footer */
-footer {
+/* Newsletter Section */
+.newsletter {
   text-align: center;
-  padding: 1rem;
-  background-color: #5a4fcf;
-  color: white;
+  padding: 3rem 10%;
+  background: linear-gradient(to right, #8c9eff, #cfd9df);
+}
+
+.email-input {
+  padding: 0.5rem;
+  border-radius: 25px;
+  border: 1px solid #ccc;
+  width: 60%;
+  margin-top: 1rem;
+}
+
+.subscribe-btn {
+  margin-top: 1rem;
+  background-color: #00c8ff;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.subscribe-btn:hover {
+  background-color: #00b8e6;
 }
