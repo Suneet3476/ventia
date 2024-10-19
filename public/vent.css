@@ -5,43 +5,66 @@
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
 }
-
 body {
   background-color: #100d28;
   color: white;
   display: flex;
 }
-
-v
+.background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  opacity: 0.1;
+  z-index: -1;
+}
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+}
+header h1 {
+  font-size: 2.5rem;
+  color: #ff00e2;
+  margin-bottom: 20px;
+}
+header p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
 /* Coming Soon Section */
 .coming-soon h2 {
   font-size: 2rem;
   color: #ff00e2;
   margin-bottom: 20px;
 }
-
 .coming-soon p {
   font-size: 1.2rem;
   margin-bottom: 20px;
   line-height: 1.6;
 }
-
 .coming-soon ul {
   margin-bottom: 30px;
 }
-
 .coming-soon ul li {
   margin-bottom: 10px;
   list-style-type: none;
   font-size: 1.1rem;
 }
-
 .coming-soon ul li:before {
   content: '• ';
   color: #00a2ff;
   font-size: 1.5rem;
 }
-
 button {
   background: #8906e6;
   color: white;
@@ -52,16 +75,13 @@ button {
   transition: transform 0.3s ease, background-color 0.3s ease;
   font-size: 1rem;
 }
-
 button:hover {
   background-color: #ff00e2;
   transform: scale(1.05);
 }
-
 .glow-on-hover {
   position: relative;
 }
-
 .glow-on-hover:before {
   content: '';
   position: absolute;
