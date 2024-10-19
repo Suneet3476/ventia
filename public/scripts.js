@@ -1,9 +1,10 @@
-// Add scroll animation for features section
-document.addEventListener('scroll', function () {
-  const features = document.querySelector('.features');
-  const scrollPosition = window.scrollY + window.innerHeight;
+// Simple auto-scrolling carousel
+let testimonials = document.querySelector('.carousel');
+let index = 0;
 
-  if (scrollPosition > features.offsetTop + 100) {
-    features.classList.add('animated');
-  }
-});
+function rotateTestimonials() {
+  index = (index + 1) % 3;  // Cycle through testimonials
+  testimonials.style.transform = `translateX(-${index * 100}%)`;
+}
+
+setInterval(rotateTestimonials, 3000);
