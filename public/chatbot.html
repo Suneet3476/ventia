@@ -13,26 +13,24 @@
   <div class="chat-container">
     <!-- Chat Header -->
     <div class="chat-header">
-      <h2>Moodie - Your Chat Companion</h2>
+      <h2>Moodie <span>- Your Chat Companion</span></h2>
+      <div class="header-status">
+        <div class="status-circle"></div>
+        <span>Online</span>
+      </div>
     </div>
 
     <!-- Chat Box (Conversation History) -->
     <div class="chat-box" id="chat-box">
-      <!-- Example Messages (can be removed later) -->
-      <div class="message bot-message">
-        <p>Hello! I'm Moodie. How are you feeling today?</p>
-        <span class="message-time">10:00 AM</span>
-      </div>
-      <div class="message user-message">
-        <p>I'm feeling good, thanks!</p>
-        <span class="message-time">10:01 AM</span>
-      </div>
+      <!-- Messages will dynamically load here -->
     </div>
 
     <!-- Message Input Area -->
     <div class="message-input">
-      <input type="text" id="user-input" placeholder="Type a message...">
-      <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+      <div class="input-wrapper">
+        <input type="text" id="user-input" placeholder="Type your message..." autofocus>
+        <button id="send-button" aria-label="Send Message"><i class="fas fa-paper-plane"></i></button>
+      </div>
     </div>
   </div>
 </body>
