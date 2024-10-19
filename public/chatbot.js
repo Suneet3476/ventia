@@ -15,7 +15,7 @@ sendButton.addEventListener('click', sendMessage);
 
 // Define your Hugging Face API token and model URL
 const API_TOKEN = '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'; 
-const API_URL = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium';
+const API_URL = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-small';
 
 // Send message to Hugging Face API
 async function sendMessageToAPI(message) {
