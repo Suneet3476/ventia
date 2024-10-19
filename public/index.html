@@ -13,24 +13,25 @@
   <header class="navbar">
     <div class="logo">Ventia</div>
     <ul class="nav-links">
-      <li><button class="nav-btn">Home</button></li>
-      <li><button class="nav-btn">About Us</button></li>
-      <li><button class="nav-btn">Our Values</button></li>
-      <li><button class="nav-btn">Login/Signup</button></li>
+      <li><a href="#" class="nav-btn">Home</a></li>
+      <li><a href="#about" class="nav-btn">About Us</a></li>
+      <li><a href="#values" class="nav-btn">Our Values</a></li>
+      <li><a href="#login" class="nav-btn">Login/Signup</a></li>
     </ul>
   </header>
 
   <!-- Hero Section -->
   <section class="hero">
+    <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1>Welcome to <span class="highlight">Ventia</span></h1>
-      <p>Your mental health matters. Take the first step toward emotional well-being.</p>
-      <a href="login.html" class="cta-btn">Join Now</a>
+      <p>Your mental health matters. Join us to start your journey toward emotional well-being.</p>
+      <a href="#login" class="cta-btn">Join Now</a>
     </div>
   </section>
 
   <!-- Features Section -->
-  <section class="features">
+  <section id="about" class="features">
     <h2>Why Choose Ventia?</h2>
     <div class="feature-grid">
       <div class="card">
@@ -56,21 +57,8 @@
     </div>
   </section>
 
-  <section class="presentation">
-  <h2>Our Vision & Mission</h2>
-  <div class="iframe-container">
-    <iframe 
-      src="https://gamma.app/docs/Ventia-Revolutionizing-Mental-Wellness-g5cqkayq4sgurjm?mode=doc" 
-      frameborder="0" 
-      allowfullscreen 
-      loading="lazy">
-    </iframe>
-  </div>
-</section>
-
-
   <!-- Testimonials Section -->
-  <section class="testimonials">
+  <section class="testimonials" id="values">
     <h2>What Our Users Say</h2>
     <div class="carousel">
       <div class="testimonial">
@@ -85,17 +73,13 @@
         <p>"The AI chatbot is surprisingly comforting!"</p>
         <span>- John</span>
       </div>
-      <div class="testimonial">
-        <p>"Community events helped me find new friends!"</p>
-        <span>- Sarah</span>
-      </div>
     </div>
   </section>
 
   <!-- Newsletter Section -->
-  <section class="newsletter">
+  <section class="newsletter" id="login">
     <h2>Stay Connected</h2>
-    <p>Subscribe to our newsletter for the latest updates and resources.</p>
+    <p>Subscribe to our newsletter for updates and resources.</p>
     <div class="newsletter-inputs">
       <input type="email" placeholder="Enter your email" class="email-input">
       <button class="subscribe-btn">Subscribe</button>
