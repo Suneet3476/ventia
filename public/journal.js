@@ -13,3 +13,16 @@ document.querySelector('.save-button').addEventListener('click', () => {
     alert('Please write something before saving.');
   }
 });
+
+const sidebar = document.querySelector('.sidebar');
+const toggleSidebarButton = document.querySelector('.toggle-sidebar');
+const sidebarRestoreButton = document.querySelector('.sidebar-restore');
+
+toggleSidebarButton.addEventListener('click', () => {
+  sidebar.classList.toggle('collapsed');
+  document.querySelector('.main-content').classList.toggle('expanded');
+});
+
+sidebarRestoreButton.addEventListener('click', () => {
+  sidebar.classList.remove('collapsed');
+});
