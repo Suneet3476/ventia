@@ -13,7 +13,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  padding-top: 80px; /* to offset navbar */
+  padding-top: 80px;
+  overflow: hidden; /* To hide floating objects */
 }
 
 /* Navbar */
@@ -27,45 +28,17 @@ body {
   width: 100%;
   top: 0;
   z-index: 1000;
-  transition: background-color 0.4s ease;
 }
 
 .navbar .logo {
   font-size: 2rem;
   color: white;
   font-weight: 700;
-  letter-spacing: 1px;
-  cursor: pointer;
 }
 
 .nav-links {
   display: flex;
   gap: 2rem;
-}
-
-.nav-btn {
-  position: relative;
-  color: white;
-  font-weight: 500;
-  font-size: 1.1rem;
-  text-decoration: none;
-}
-
-.nav-btn::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 2px;
-  background-color: var(--accent-color);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.nav-btn:hover::after {
-  transform: scaleX(1);
 }
 
 /* Authentication Wrapper */
@@ -74,15 +47,15 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 80px); /* offset for navbar */
+  height: calc(100vh - 80px);
 }
 
 .auth-container {
   background: white;
-  padding: 40px;
+  padding: 60px; /* Enlarged */
   border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  width: 350px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  width: 420px; /* Enlarged */
   position: relative;
   transition: 0.5s;
 }
@@ -100,28 +73,25 @@ body {
 .input-group label {
   display: block;
   margin-bottom: 5px;
-  font-weight: 500;
 }
 
 .input-group input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   border-radius: 5px;
   border: 1px solid var(--primary-color);
-  font-size: 1rem;
   background: #f0f0f0;
 }
 
 .submit-btn {
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .submit-btn:hover {
@@ -139,7 +109,7 @@ body {
   font-weight: 600;
 }
 
-/* Toggle Form */
+/* Enlarged Form Size */
 .form-box {
   display: none;
 }
@@ -148,15 +118,78 @@ body {
   display: block;
 }
 
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
+/* Footer Fix */
+footer {
+  text-align: center;
+  padding: 10px 0;
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+/* Floating Animated Objects */
+.floating-object {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #ff5f6d, #ffc371);
+  border-radius: 50%;
+  top: 10%;
+  left: 5%;
+  animation: move 5s infinite ease-in-out;
+  z-index: 0;
+  opacity: 0.6;
+}
+
+.floating-object.two {
+  background: radial-gradient(circle, #00b09b, #96c93d);
+  width: 120px;
+  height: 120px;
+  top: 70%;
+  left: 80%;
+  animation: move 7s infinite ease-in-out;
+  opacity: 0.6;
+}
+
+/* Animation for floating objects */
+@keyframes move {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
     transform: translateY(-20px);
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Typed Text Animation */
+.typed-text-wrapper {
+  text-align: center;
+  position: absolute;
+  top: 100px;
+  width: 100%;
+}
+
+.typed-text {
+  font-size: 2.5rem;
+  color: white;
+  animation: typing 3s steps(30) infinite;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid white;
+}
+
+@keyframes typing {
+  0% {
+    width: 0;
+  }
+  50% {
+    width: 100%;
+  }
+  100% {
+    width: 0;
   }
 }
 
