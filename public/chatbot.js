@@ -83,7 +83,7 @@ function getTime() {
 function generateBotResponse(userMessage) {
   // Keywords categorized by emotion
   const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated"];
-  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry"];
+  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry", "dont feel good"];
   const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life", "kill"];
   const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken"];
 
