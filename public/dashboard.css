@@ -71,6 +71,25 @@ body {
   font-size: 1.5rem;
 }
 
+/* Sidebar Restore Button */
+.sidebar-restore {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  background: #8906e6;
+  border: none;
+  padding: 10px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  color: white;
+  font-size: 1.5rem;
+}
+
+.sidebar.collapsed + .sidebar-restore {
+  display: block;
+}
+
 .nav ul {
   list-style: none;
 }
@@ -117,14 +136,19 @@ body {
 
 .card, .widget {
   background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
+  padding: 40px;
   border-radius: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card h2, .widget h3 {
+  margin-bottom: 20px; /* Spacing after titles */
   color: white;
   transition: color 0.3s ease;
+}
+
+.card p, .widget p {
+  margin-bottom: 30px; /* More spacing after paragraphs */
 }
 
 .card:hover h2, .widget:hover h3 {
@@ -162,7 +186,7 @@ button:hover {
   bottom: -2px;
   background: linear-gradient(45deg, #8906e6, #ff00e2);
   z-index: -1;
-  filter: blur(15px); /* Reduced glow */
+  filter: blur(8px); /* Further reduced glow */
   border-radius: inherit;
 }
 
@@ -175,7 +199,7 @@ button:hover {
   position: relative;
 }
 
-.hover-underline-animation:after {
+.hover-underline-animation span:after {
   content: '';
   position: absolute;
   width: 0;
@@ -184,10 +208,11 @@ button:hover {
   margin-top: 5px;
   background: #00a2ff;
   transition: width 0.3s;
+  left: 0;
 }
 
-.hover-underline-animation:hover:after {
-  width: 100%;
+.hover-underline-animation:hover span:after {
+  width: 100%; /* Only under "Suneet" */
 }
 
 /* Pie Chart Section */
