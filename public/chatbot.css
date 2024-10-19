@@ -10,42 +10,66 @@
 html, body {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #0d031a, #15032f);
+  background: black; /* Solid black background for a space vibe */
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
+/* Adding the starry sky background with twinkling stars */
+body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('https://i.imgur.com/Nhz25ZZ.png') repeat; /* Subtle starry background */
+  opacity: 0.3;
+  animation: twinkle 10s infinite ease-in-out;
+  z-index: -1; /* Keep stars behind the chat */
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0.3; }
+}
+
 /* Full-screen Chat Container */
 .chat-container {
   display: flex;
   flex-direction: column;
-  width: 100vw;
-  height: 100vh;
+  width: 75vw; /* Decreased width for a more Instagram chat feel */
+  max-width: 1100px;
+  height: 85vh; /* Slightly smaller height to fit more content */
+  max-height: 85vh;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(20px);
   color: white;
-  border-radius: 0; /* Full screen */
+  border-radius: 20px; /* Softer edges for premium feel */
   box-shadow: 0px 10px 40px rgba(0, 0, 0, 0.8);
   overflow: hidden;
+  position: relative; /* For stars to stay behind */
 }
 
 /* Chat Header */
 .chat-header {
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #350078, #5400a8);
+  padding: 10px 20px; /* Reduced padding for less zoomed feel */
+  background: linear-gradient(135deg, #29006e, #5400a8);
   text-align: center;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.6rem; /* Smaller for sleekness */
   font-weight: 600;
   font-family: 'Playfair Display', serif;
   letter-spacing: 1.2px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   position: relative;
   z-index: 1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 20px 20px 0 0; /* Rounded top corners */
 }
 
 .chat-header h2 {
@@ -60,11 +84,11 @@ html, body {
 
 .chat-header span {
   display: block;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 400;
   font-family: 'Poppins', sans-serif;
   color: rgba(255, 255, 255, 0.7);
-  margin-top: 5px;
+  margin-top: 3px;
 }
 
 .header-status {
@@ -75,27 +99,27 @@ html, body {
 }
 
 .status-circle {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
   background-color: #04fc43;
   border-radius: 50%;
-  margin-right: 8px;
-  box-shadow: 0 0 10px rgba(4, 252, 67, 0.8);
+  margin-right: 6px;
+  box-shadow: 0 0 8px rgba(4, 252, 67, 0.8);
 }
 
 .header-status span {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
 /* Chat Box - Scrollable Conversation Area */
 .chat-box {
   flex-grow: 1;
-  padding: 30px;
+  padding: 25px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px; /* Reduced gap for tighter look */
   background-color: rgba(0, 0, 0, 0.4);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -112,9 +136,9 @@ html, body {
 
 /* Messages */
 .message {
-  max-width: 70%;
-  padding: 18px 25px;
-  border-radius: 25px;
+  max-width: 65%;
+  padding: 15px 20px;
+  border-radius: 20px;
   font-size: 1.1rem;
   line-height: 1.6;
   position: relative;
@@ -178,10 +202,11 @@ html, body {
 .message-input {
   display: flex;
   align-items: center;
-  padding: 20px 30px;
+  padding: 15px 25px;
   background: rgba(0, 0, 0, 0.7);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
+  border-radius: 0 0 20px 20px; /* Rounded bottom corners */
 }
 
 .input-wrapper {
@@ -190,19 +215,19 @@ html, body {
   width: 100%;
   background-color: rgba(255, 255, 255, 0.05);
   border-radius: 30px;
-  padding: 15px 20px;
+  padding: 10px 20px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .message-input input {
   flex-grow: 1;
-  padding: 15px;
+  padding: 10px;
   border-radius: 30px;
   border: none;
   outline: none;
   background: transparent;
   color: white;
-  font-size: 1.1rem;
+  font-size: 1rem;
 }
 
 .message-input input::placeholder {
@@ -213,7 +238,7 @@ html, body {
   background: linear-gradient(135deg, #5400a8, #ff0099);
   border: none;
   border-radius: 50%;
-  padding: 15px;
+  padding: 12px;
   margin-left: 10px;
   color: white;
   cursor: pointer;
@@ -227,53 +252,8 @@ html, body {
 }
 
 .message-input button i {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   color: white;
-}
-
-/* Header Glow Animation */
-.chat-header:hover {
-  transform: translateY(-5px);
-  text-shadow: 0 0 10px rgba(137, 6, 230, 0.5);
-  box-shadow: 0 4px 15px rgba(137, 6, 230, 0.5);
-}
-
-/* Subtle Glow for the Header */
-@keyframes header-glow {
-  from {
-    box-shadow: 0 0 10px rgba(137, 6, 230, 0.5);
-  }
-  to {
-    box-shadow: 0 0 20px rgba(137, 6, 230, 0.7);
-  }
-}
-
-.chat-header {
-  animation: header-glow 2s infinite alternate;
-}
-
-/* Input Glow Animation */
-.message-input input:focus {
-  outline: none;
-  border: none;
-  box-shadow: 0 0 20px rgba(255, 0, 226, 0.5);
-}
-
-/* Additional Floating Header Animation */
-@keyframes floating {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-  100% {
-    transform: translateY(0);
-  }
-}
-
-.chat-header {
-  animation: floating 3s infinite ease-in-out;
 }
 
 /* Smooth Scrollbar */
@@ -288,56 +268,6 @@ html, body {
 
 .chat-box::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.05);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #8700f2, #ff0099);
-  border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Special Gradient Animation */
-@keyframes gradientShift {
-  0% {
-    background: linear-gradient(135deg, #5400a8, #8700f2);
-  }
-  50% {
-    background: linear-gradient(135deg, #ff0099, #5400a8);
-  }
-  100% {
-    background: linear-gradient(135deg, #5400a8, #8700f2);
-  }
-}
-
-.chat-box {
-  animation: gradientShift 8s infinite alternate ease-in-out;
-}
-
-/* Message Bounce-in Animation */
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.message {
-  animation: bounceIn 0.6s forwards;
 }
 
 /* Special Effects on Hover */
@@ -367,12 +297,12 @@ body {
 
 @keyframes backgroundShift {
   0% {
-    background: linear-gradient(135deg, #0d031a, #15032f);
+    background: black;
   }
   50% {
-    background: linear-gradient(135deg, #15032f, #240042);
+    background: black;
   }
   100% {
-    background: linear-gradient(135deg, #0d031a, #15032f);
+    background: black;
   }
 }
