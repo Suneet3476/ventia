@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventia Dashboard</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+  <script defer src="js/dashboard.js"></script>
+</head>
+<body>
+  <!-- Sidebar (optional, or this can be a top navbar) -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Ventia</h2>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Vent</a></li>
+        <li><a href="#">Listen</a></li>
+        <li><a href="#">Journal</a></li>
+        <li><a href="#">Mood Check-in</a></li>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header>
+      <h1>Welcome, [Username]</h1>
+    </header>
+
+    <section class="dashboard-overview">
+      <div class="card">
+        <h2>Vent</h2>
+        <p>Need to let out your emotions? Start here!</p>
+        <button id="vent-button">Start Venting</button>
+      </div>
+      <div class="card">
+        <h2>Listen</h2>
+        <p>Listen to others and support them.</p>
+        <button id="listen-button">Start Listening</button>
+      </div>
+    </section>
+
+    <!-- Other Dashboard Widgets -->
+    <section class="widgets">
+      <div class="widget">
+        <h3>Daily Mood Check-In</h3>
+        <p>How are you feeling today?</p>
+        <button id="mood-checkin">Check In</button>
+      </div>
+      <div class="widget">
+        <h3>Journal Entry</h3>
+        <p>Start writing your thoughts now.</p>
+        <button id="start-journal">Go to Journal</button>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
