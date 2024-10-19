@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mood Check-In | Ventia</title>
+  <link rel="stylesheet" href="styles/mood.css">
+  <script defer src="scripts/mood.js"></script>
+</head>
+<body>
+  <div class="background-shapes"></div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Ventia</h2>
+      <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a></li>
+        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li><a href="vent.html"><i class="fas fa-bullhorn"></i> Vent</a></li>
+        <li><a href="listen.html"><i class="fas fa-headphones-alt"></i> Listen</a></li>
+        <li><a href="journal.html"><i class="fas fa-book"></i> Journal</a></li>
+        <li><a href="mood.html"><i class="fas fa-smile"></i> Mood Check-in</a></li>
+        <li><a href="chatbot.html"><i class="fas fa-robot"></i> Chatbot</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Sidebar Restore Button -->
+  <button class="sidebar-restore"><i class="fas fa-arrow-right"></i></button>
+
+  <!-- Main Content Area -->
+  <div class="main-content">
+    <header>
+      <h1>How are you feeling today?</h1>
+      <p>Select the emoji that best represents your current mood.</p>
+    </header>
+
+    <!-- Mood Selection -->
+    <section class="mood-selection">
+      <div class="emoji-container">
+        <div class="emoji" data-mood="happy">😊</div>
+        <div class="emoji" data-mood="neutral">😐</div>
+        <div class="emoji" data-mood="sad">😢</div>
+        <div class="emoji" data-mood="angry">😡</div>
+        <div class="emoji" data-mood="anxious">😰</div>
+        <div class="emoji" data-mood="excited">😄</div>
+      </div>
+      <button id="submit-mood" class="btn-save">Submit Mood</button>
+    </section>
+
+    <!-- Mood History -->
+    <section class="mood-history">
+      <h2>Your Mood History</h2>
+      <div class="history-graph">
+        <!-- Placeholder for the Mood History Graph -->
+        <canvas id="moodChart" width="400" height="200"></canvas>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
