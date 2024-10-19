@@ -165,7 +165,9 @@ body {
 
 .emoji-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  flex-wrap: wrap;  /* Allow emojis to wrap if the screen is small */
+  gap: 20px;  /* Add spacing between emojis */
   margin-bottom: 30px;
 }
 
