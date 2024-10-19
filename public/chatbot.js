@@ -84,7 +84,7 @@ function generateBotResponse(userMessage) {
   // Keywords categorized by emotion
   const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated"];
   const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry"];
-  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life"];
+  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life", "kill"];
   const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken"];
 
   // Bot responses based on detected emotion/tone
