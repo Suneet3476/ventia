@@ -5,33 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Values | Ventia</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
   <header>
-    <nav>
+    <nav class="navbar">
       <div class="logo">Ventia</div>
       <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="#">Our Values</a></li>
-        <li><a href="login.html">Login/Signup</a></li>
+        <li><a href="index.html" class="nav-btn">Home</a></li>
+        <li><a href="about.html" class="nav-btn">About Us</a></li>
+        <li><a href="#" class="nav-btn active">Our Values</a></li>
+        <li><a href="login.html" class="nav-btn">Login/Signup</a></li>
       </ul>
     </nav>
   </header>
 
+  <!-- Hero Section -->
   <section class="values-hero">
-    <h1>Our Values</h1>
-    <p>At Ventia, we believe in fostering emotional well-being through support, connection, and care.</p>
+    <div class="hero-content">
+      <h1 class="fade-in">Our Values</h1>
+      <p class="fade-in">At Ventia, we believe in fostering emotional well-being through support, connection, and care.</p>
+    </div>
   </section>
 
+  <!-- Core Values Section -->
   <section class="values-list">
     <h2>Core Values</h2>
-    <ul>
-      <li>Accessibility: Making mental health support available for all.</li>
-      <li>Anonymity: Ensuring user privacy and security.</li>
-      <li>Empathy: Building a community rooted in understanding and kindness.</li>
-      <li>Innovation: Using AI and technology to enhance emotional well-being.</li>
-    </ul>
+    <div class="values-grid">
+      <div class="value-item scroll-reveal">
+        <i class="fas fa-universal-access"></i>
+        <h3>Accessibility</h3>
+        <p>Making mental health support available for all.</p>
+      </div>
+      <div class="value-item scroll-reveal">
+        <i class="fas fa-user-secret"></i>
+        <h3>Anonymity</h3>
+        <p>Ensuring user privacy and security.</p>
+      </div>
+      <div class="value-item scroll-reveal">
+        <i class="fas fa-heart"></i>
+        <h3>Empathy</h3>
+        <p>Building a community rooted in understanding and kindness.</p>
+      </div>
+      <div class="value-item scroll-reveal">
+        <i class="fas fa-lightbulb"></i>
+        <h3>Innovation</h3>
+        <p>Using AI and technology to enhance emotional well-being.</p>
+      </div>
+    </div>
   </section>
 
   <footer>
