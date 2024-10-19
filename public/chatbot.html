@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventia Chatbot</title>
+  <link rel="stylesheet" href="chatbot.css">
+  <script defer src="chatbot.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+  <div class="chat-container">
+    <!-- Chat Header -->
+    <div class="chat-header">
+      <h2>Ventia Chatbot</h2>
+    </div>
+
+    <!-- Chat Box (Conversation) -->
+    <div class="chat-box" id="chat-box">
+      <!-- Message examples -->
+      <div class="message bot-message">
+        <p>Hello, how can I help you today?</p>
+        <span class="message-time">10:00 AM</span>
+      </div>
+      <div class="message user-message">
+        <p>What's the weather like today?</p>
+        <span class="message-time">10:01 AM</span>
+      </div>
+    </div>
+
+    <!-- Message Input Area -->
+    <div class="message-input">
+      <input type="text" id="user-input" placeholder="Type a message...">
+      <button id="send-button"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+</body>
+</html>
