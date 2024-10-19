@@ -5,32 +5,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vent - Coming Soon</title>
   <link rel="stylesheet" href="vent.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <script defer src="vent.js"></script>
 </head>
 <body>
   <div class="background-shapes"></div>
 
   <!-- Sidebar with glassmorphism, consistent with dashboard -->
-  <aside class="sidebar">
-    <div class="sidebar-header">
-      <h2>Ventia</h2>
-      <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
-    </div>
-    <nav class="nav">
-      <ul>
-        <!-- New Home Button -->
-        <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
-        <!-- Existing buttons -->
-        <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
-        <li><a href="vent.html"><i class="fas fa-bullhorn"></i> Vent</a></li>
-        <li><a href="listen.html"><i class="fas fa-headphones-alt"></i> Listen</a></li>
-        <li><a href="journal.html"><i class="fas fa-book"></i> Journal</a></li>
-        <li><a href="mood.html"><i class="fas fa-smile"></i> Mood Check-in</a></li>
-        <!-- New Chatbot Button -->
-        <li><a href="chatbot.html"><i class="fas fa-robot"></i> Chatbot</a></li>
-      </ul>
-    </nav>
-  </aside>
+  <!-- Sidebar with Glassmorphism and Collapsible Design -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <h2>Ventia</h2>
+    <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+  </div>
+  <nav class="nav">
+    <ul>
+      <li><a href="dashboard.html"><i class="fas fa-home"></i> Home</a></li>
+      <li><a href="profile.html"><i class="fas fa-user-circle"></i> Profile</a></li>
+      <li><a href="vent.html"><i class="fas fa-bullhorn"></i> Vent</a></li>
+      <li><a href="listen.html"><i class="fas fa-headphones-alt"></i> Listen</a></li>
+      <li><a href="journal.html"><i class="fas fa-book"></i> Journal</a></li>
+      <li><a href="mood.html"><i class="fas fa-smile"></i> Mood Check-in</a></li>
+      <li><a href="chatbot.html"><i class="fas fa-robot"></i> Chatbot</a></li>
+    </ul>
+  </nav>
+</aside>
+
+<!-- Sidebar Restore Button -->
+<button class="sidebar-restore"><i class="fas fa-arrow-right"></i></button>
+
 
   <!-- Main Content -->
   <div class="main-content">
