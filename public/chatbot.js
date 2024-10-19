@@ -14,7 +14,7 @@ userInput.addEventListener('keypress', function (e) {
 sendButton.addEventListener('click', sendMessage);
 
 function sendMessage() {
-  const userMessage = userInput.value.trim();
+  const userMessage = userInput.value.trim().toLowerCase();  // Lowercase to make keyword detection easier
   
   if (userMessage !== "") {
     // Add user message to chat
@@ -27,10 +27,11 @@ function sendMessage() {
     // Show bot typing indicator
     showTypingIndicator();
     
-    // Simulate bot response after delay
+    // Simulate bot response after delay based on user message
     setTimeout(() => {
       removeTypingIndicator();
-      addMessage("Thanks for your input! What else can I assist you with?", 'bot-message');
+      const botResponse = generateBotResponse(userMessage);
+      addMessage(botResponse, 'bot-message');
     }, 1500);
   }
 }
@@ -76,4 +77,38 @@ function removeTypingIndicator() {
 function getTime() {
   const now = new Date();
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
+
+// Function to generate bot response based on user input
+function generateBotResponse(userMessage) {
+  // Keywords categorized by emotion
+  const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated"];
+  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry"];
+  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life"];
+  const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken"];
+
+  // Bot responses based on detected emotion/tone
+  if (containsKeyword(userMessage, positiveKeywords)) {
+    return "I'm glad to hear you're feeling good! Keep that positive energy flowing. 😊 What else would you like to talk about?";
+  }
+  
+  if (containsKeyword(userMessage, negativeKeywords)) {
+    return "I'm so sorry you're feeling this way. It's okay to feel down sometimes, but remember you're not alone. Talking about it might help. What would make things better for you right now?";
+  }
+  
+  if (containsKeyword(userMessage, comfortingKeywords)) {
+    return "It sounds like you're going through something tough, and I'm here for you. Sometimes sharing your feelings can make a world of difference. You are important, and your feelings matter. 💜";
+  }
+
+  if (containsKeyword(userMessage, suicideKeywords)) {
+    return "Please, take care of yourself. I'm deeply concerned about your well-being. Help is available. I’m alerting emergency services right now. You're never alone. 🌟";
+  }
+  
+  // Default response if no keywords matched
+  return "Thank you for sharing. I’m here to listen and help. Is there anything else on your mind?";
+}
+
+// Helper function to detect if any keyword is present in the user message
+function containsKeyword(message, keywordsArray) {
+  return keywordsArray.some(keyword => message.includes(keyword));
 }
