@@ -237,3 +237,106 @@ footer {
   margin: 0 auto;
 }
 
+/* Our Values Page */
+.values-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  background-color: #00c6ff;
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.values-hero h1 {
+  font-size: 48px;
+}
+
+.values-list {
+  padding: 50px;
+  text-align: center;
+  background-color: #f8f9fa;
+}
+
+.values-list h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.values-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.values-list ul li {
+  font-size: 20px;
+  margin: 10px 0;
+}
+
+/* Login/Signup Page */
+.auth-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  background-color: #36d1dc;
+  color: white;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.auth-hero h1 {
+  font-size: 48px;
+}
+
+.auth-forms {
+  display: flex;
+  justify-content: space-around;
+  padding: 50px;
+}
+
+.form-container {
+  width: 45%;
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-container label {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.form-container input {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.form-container button {
+  padding: 12px;
+  background-color: #36d1dc;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form-container button:hover {
+  background-color: #33c0cb;
+}
+
+
