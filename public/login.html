@@ -20,41 +20,37 @@
     </nav>
   </header>
 
-  <div class="auth-container">
-    <div class="auth-content">
-      <div class="auth-header">
-        <h1 id="auth-title">Welcome Back!</h1>
-        <p id="auth-desc">Join Ventia today and be part of a supportive mental health community.</p>
-      </div>
-
-      <div class="form-toggle">
-        <button class="toggle-btn active" id="login-toggle">Login</button>
-        <button class="toggle-btn" id="signup-toggle">Sign Up</button>
-      </div>
-
-      <div class="form-container">
-        <!-- Login Form -->
-        <form id="login-form" class="active-form">
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required>
-
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" required>
-
+  <div class="auth-wrapper">
+    <div class="auth-container">
+      <div class="form-box login active">
+        <h2>Welcome Back!</h2>
+        <form>
+          <div class="input-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+          </div>
           <button type="submit" class="submit-btn">Login</button>
-          <p class="switch-text">Don't have an account? <span id="switch-to-signup">Sign Up</span></p>
+          <p class="toggle-text">Don’t have an account? <span class="toggle-link" id="to-signup">Sign Up</span></p>
         </form>
+      </div>
 
-        <!-- Signup Form -->
-        <form id="signup-form" class="inactive-form">
-          <label for="new-email">Email:</label>
-          <input type="email" id="new-email" name="new-email" required>
-
-          <label for="new-password">Password:</label>
-          <input type="password" id="new-password" name="new-password" required>
-
+      <div class="form-box signup">
+        <h2>Create Your Account</h2>
+        <form>
+          <div class="input-group">
+            <label for="new-email">Email</label>
+            <input type="email" id="new-email" name="new-email" required>
+          </div>
+          <div class="input-group">
+            <label for="new-password">Password</label>
+            <input type="password" id="new-password" name="new-password" required>
+          </div>
           <button type="submit" class="submit-btn">Sign Up</button>
-          <p class="switch-text">Already have an account? <span id="switch-to-login">Login</span></p>
+          <p class="toggle-text">Already have an account? <span class="toggle-link" id="to-login">Login</span></p>
         </form>
       </div>
     </div>
