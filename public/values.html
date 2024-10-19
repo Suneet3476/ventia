@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Our Values | Ventia</title>
   <link rel="stylesheet" href="cstyles.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <header>
@@ -55,26 +55,20 @@
     </div>
   </section>
 
-  <!-- Mental Health Awareness Section -->
+  <!-- Mental Health Stats with Live Graph -->
   <section class="mental-health">
     <h2>Mental Health in Today's World</h2>
-    <p>Many individuals around the globe are silently struggling with mental health issues. At Ventia, we believe that every feeling matters and every person matters.</p>
+    <p>Many individuals silently struggle with mental health issues. Let's take a look at some eye-opening statistics.</p>
 
-    <!-- Graphs Section -->
-    <div class="graphs-container">
-      <div class="graph">
-        <h3>Depression Statistics</h3>
-        <img src="path-to-your-bar-graph-image.png" alt="Depression Stats Graph">
-      </div>
-      <div class="graph">
-        <h3>Anxiety Levels</h3>
-        <img src="path-to-your-line-graph-image.png" alt="Anxiety Stats Graph">
-      </div>
+    <!-- Line Chart Section -->
+    <div class="chart-container">
+      <canvas id="mentalHealthChart"></canvas>
     </div>
-
-    <div class="emotional-message">
-      <h2>Your Emotions Matter</h2>
-      <p>No feeling is too small, no struggle too insignificant. Every person deserves to be heard, understood, and cared for.</p>
+    
+    <!-- Quote Section -->
+    <div class="quote-section">
+      <h2>"Mental health is just as important as physical health."</h2>
+      <p>- Unknown</p>
     </div>
   </section>
 
@@ -82,6 +76,6 @@
     <p>&copy; 2024 Ventia | All Rights Reserved</p>
   </footer>
 
-  <script src="public/scripts.js"></script>
+  <script src="public/cscripts.js"></script>
 </body>
 </html>
