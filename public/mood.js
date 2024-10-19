@@ -1,4 +1,5 @@
 // Select all emojis and add event listeners
+// Select all emojis and add event listeners
 const emojis = document.querySelectorAll('.emoji');
 let selectedMood = null;
 
@@ -13,6 +14,7 @@ emojis.forEach(emoji => {
   });
 });
 
+// Handle mood submission
 document.getElementById('submit-mood').addEventListener('click', () => {
   if (selectedMood) {
     alert(`You selected: ${selectedMood}`);
@@ -20,6 +22,7 @@ document.getElementById('submit-mood').addEventListener('click', () => {
     alert('Please select a mood!');
   }
 });
+
 
 // Mood History Chart (placeholder functionality)
 const ctx = document.getElementById('moodChart').getContext('2d');
