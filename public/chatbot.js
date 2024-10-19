@@ -1,3 +1,4 @@
+// Get elements
 const sendButton = document.getElementById('send-button');
 const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
@@ -13,9 +14,9 @@ sendButton.addEventListener('click', () => {
     // Clear the input field
     userInput.value = "";
     
-    // Simulate bot response
+    // Simulate bot response after delay
     setTimeout(() => {
-      addMessage("I'm here to help you!", 'bot-message');
+      addMessage("Thanks for your input! What else can I assist you with?", 'bot-message');
     }, 1000);
   }
 });
@@ -29,7 +30,7 @@ function addMessage(text, className) {
   `;
   
   chatBox.appendChild(messageElement);
-  chatBox.scrollTop = chatBox.scrollHeight; // Scroll to bottom
+  chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
 }
 
 // Function to get current time
