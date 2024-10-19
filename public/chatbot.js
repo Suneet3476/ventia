@@ -13,63 +13,67 @@ userInput.addEventListener('keypress', function (e) {
 // Function to handle sending messages
 sendButton.addEventListener('click', sendMessage);
 
-// Set the API_URL to your Render Flask server
-const API_URL = 'https://<your-app-name>.onrender.com/generate'; // Replace with your actual URL
-
-// Send message to your Render-deployed Flask API
-async function sendMessageToAPI(message) {
-  try {
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        inputs: message, // Send the user input to the Flask server
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    return data.generated_text || 'Sorry, I am having trouble responding right now.';
-  } catch (error) {
-    console.error('Error:', error);
-    return 'Something went wrong. Please try again later.';
+function sendMessage() {
+  const userMessage = userInput.value.trim();
+  
+  if (userMessage !== "") {
+    // Add user message to chat
+    addMessage(userMessage, 'user-message');
+    
+    // Clear the input field
+    userInput.value = "";
+    userInput.focus(); // Refocus on input field for continuous typing
+    
+    // Show bot typing indicator
+    showTypingIndicator();
+    
+    // Simulate bot response after delay
+    setTimeout(() => {
+      removeTypingIndicator();
+      addMessage("Thanks for your input! What else can I assist you with?", 'bot-message');
+    }, 1500);
   }
 }
 
-// Function to display messages in the chat
-function displayMessage(message, sender) {
+function addMessage(text, className) {
   const messageElement = document.createElement('div');
-  messageElement.classList.add('chat-message', sender);
-  messageElement.innerText = message;
+  messageElement.classList.add('message', className);
+  messageElement.innerHTML = `
+    <p>${text}</p>
+    <span class="message-time">${getTime()}</span>
+  `;
+  
   chatBox.appendChild(messageElement);
-  chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
+  chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
+  
+  // Delay adding the class for animation
+  setTimeout(() => {
+    messageElement.style.opacity = '1';
+    messageElement.style.transform = 'translateY(0)';
+  }, 100); // Small delay for smooth fade-in
 }
 
-// Main function to send messages
-async function sendMessage() {
-  const message = userInput.value.trim();
+// Function to show bot typing indicator
+function showTypingIndicator() {
+  const typingIndicator = document.createElement('div');
+  typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
+  typingIndicator.innerHTML = `
+    <p>Typing...</p>
+  `;
+  chatBox.appendChild(typingIndicator);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-  if (message !== '') {
-    // Display user message
-    displayMessage(message, 'user');
-    userInput.value = '';
-
-    // Get bot response from the API
-    const botResponse = await sendMessageToAPI(message);
-
-    // Display bot response
-    displayMessage(botResponse, 'bot');
+// Function to remove bot typing indicator
+function removeTypingIndicator() {
+  const typingIndicator = document.querySelector('.typing-indicator');
+  if (typingIndicator) {
+    typingIndicator.remove();
   }
 }
 
-// Handle 'Enter' key press as an alternate send
-document.getElementById('user-input').addEventListener('keypress', function (e) {
-  if (e.key === 'Enter') {
-    document.getElementById('send-button').click();
-  }
-});
+// Function to get current time
+function getTime() {
+  const now = new Date();
+  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+}
