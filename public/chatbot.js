@@ -13,26 +13,22 @@ userInput.addEventListener('keypress', function (e) {
 // Function to handle sending messages
 sendButton.addEventListener('click', sendMessage);
 
-// Define your Hugging Face API token and model URL
-const API_TOKEN = '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'; 
-const API_URL = 'https://api-inference.huggingface.co/models/distilgpt2';
+// Set the API_URL to your Render Flask server
+const API_URL = 'https://<your-app-name>.onrender.com/generate'; // Replace with your actual URL
 
-// Send message to Hugging Face API
+// Send message to your Render-deployed Flask API
 async function sendMessageToAPI(message) {
   try {
     const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
-        Authorization: `Bearer ${API_TOKEN}`,
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        inputs: {
-          text: message
-        }
-      })
+        inputs: message, // Send the user input to the Flask server
+      }),
     });
-    
+
     if (!response.ok) {
       throw new Error(`Error: ${response.statusText}`);
     }
