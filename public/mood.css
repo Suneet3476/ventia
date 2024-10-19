@@ -1,0 +1,127 @@
+/* Universal Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #100d28;
+  color: white;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* Background Shapes */
+.background-shapes {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  opacity: 0.1;
+  z-index: -1;
+  animation: background-move 20s infinite linear;
+}
+
+@keyframes background-move {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  transition: all 0.4s ease;
+}
+
+.sidebar-header h2 {
+  font-size: 2rem;
+  color: #ff00e2;
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 40px;
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #ff00e2;
+}
+
+header p {
+  color: #bbb;
+  margin-top: 10px;
+}
+
+/* Mood Selection Section */
+.mood-selection {
+  margin-top: 40px;
+  text-align: center;
+}
+
+.emoji-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 30px;
+}
+
+.emoji {
+  font-size: 4rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.emoji:hover {
+  transform: scale(1.2);
+  filter: brightness(1.5);
+}
+
+.emoji.selected {
+  transform: scale(1.4);
+  filter: brightness(2);
+}
+
+.btn-save {
+  background-color: #ff00e2;
+  padding: 15px;
+  border: none;
+  color: white;
+  cursor: pointer;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.btn-save:hover {
+  background-color: #00a2ff;
+  transform: scale(1.05);
+}
+
+/* Mood History Section */
+.mood-history {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.mood-history h2 {
+  color: #ff00e2;
+  margin-bottom: 20px;
+}
+
+.history-graph {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
