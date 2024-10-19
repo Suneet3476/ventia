@@ -5,13 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ventia Dashboard</title>
   <link rel="stylesheet" href="dashboard.css">
-  <script defer src="dashboard.js"></script>
+  <script defer src="js/dashboard.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- Background Animated Elements -->
-  <div class="floating-elements"></div>
-  <div class="floating-elements-2"></div>
+  <!-- Background Abstract Shapes -->
+  <div class="background-shapes"></div>
 
   <!-- Sidebar with Glassmorphism and Collapsible Design -->
   <aside class="sidebar">
@@ -30,23 +30,23 @@
     </nav>
   </aside>
 
-  <!-- Main Content Area with Smooth Animations -->
+  <!-- Main Content Area -->
   <div class="main-content">
     <header class="animated fadeInDown">
-      <h1>Welcome, Suneet!</h1>
+      <h1 class="hover-underline-animation">Welcome, Suneet!</h1>
     </header>
 
-    <!-- Dashboard Cards with Better Layout -->
+    <!-- Dashboard Cards with Better Layout and Spacing -->
     <section class="dashboard-overview animated fadeInUp">
       <div class="card glass">
         <h2><i class="fas fa-bullhorn"></i> Vent</h2>
         <p>Need to let out your emotions? Start here!</p>
-        <button id="vent-button" class="glow-on-hover">Start Venting</button>
+        <button id="vent-button" class="glow-on-hover larger-button">Start Venting</button>
       </div>
       <div class="card glass">
         <h2><i class="fas fa-headphones-alt"></i> Listen</h2>
         <p>Listen to others and support them.</p>
-        <button id="listen-button" class="glow-on-hover">Start Listening</button>
+        <button id="listen-button" class="glow-on-hover larger-button">Start Listening</button>
       </div>
     </section>
 
@@ -55,13 +55,19 @@
       <div class="widget glass">
         <h3><i class="fas fa-smile"></i> Daily Mood Check-In</h3>
         <p>How are you feeling today?</p>
-        <button id="mood-checkin" class="glow-on-hover">Check In</button>
+        <button id="mood-checkin" class="glow-on-hover larger-button">Check In</button>
       </div>
       <div class="widget glass">
         <h3><i class="fas fa-book"></i> Journal Entry</h3>
         <p>Start writing your thoughts now.</p>
-        <button id="start-journal" class="glow-on-hover">Go to Journal</button>
+        <button id="start-journal" class="glow-on-hover larger-button">Go to Journal</button>
       </div>
+    </section>
+
+    <!-- Mood Improvement Section with Pie Chart -->
+    <section class="mood-improvement animated fadeInUp delay-2s">
+      <h2>30-Day Mood Improvement</h2>
+      <canvas id="moodChart" width="400" height="400"></canvas>
     </section>
   </div>
 </body>
