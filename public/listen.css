@@ -1,22 +1,23 @@
 /* Universal Styles */
 .popup {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: rgba(0, 0, 0, 0.8);
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00a2ff;
   color: white;
-  padding: 15px 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  font-size: 1rem;
-  animation: fade-in-out 3s ease forwards;
-  z-index: 1000;
+  padding: 15px 30px;
+  border-radius: 25px;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInOut 3s ease-in-out;
 }
 
-@keyframes fade-in-out {
-  0% { opacity: 0; transform: translateY(10px); }
-  10%, 90% { opacity: 1; transform: translateY(0); }
-  100% { opacity: 0; transform: translateY(10px); }
+/* Keyframes for Popup Animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+  10%, 90% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  100% { opacity: 0; transform: translateX(-50%) translateY(-10px); }
 }
 
 
