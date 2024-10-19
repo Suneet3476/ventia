@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ventia Journal</title>
+  <link rel="stylesheet" href="journal.css">
+  <script defer src="journal.js"></script>
+</head>
+<body>
+  <div class="background-shapes"></div>
+
+  <!-- Sidebar with glassmorphism, similar to dashboard -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Ventia</h2>
+      <button class="toggle-sidebar"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav class="nav">
+      <ul>
+        <li><a href="#"><i class="fas fa-user-circle"></i> Profile</a></li>
+        <li><a href="#"><i class="fas fa-bullhorn"></i> Vent</a></li>
+        <li><a href="#"><i class="fas fa-headphones-alt"></i> Listen</a></li>
+        <li><a href="#"><i class="fas fa-book"></i> Journal</a></li>
+        <li><a href="#"><i class="fas fa-smile"></i> Mood Check-in</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area for Journal -->
+  <div class="main-content">
+    <header>
+      <h1>Journal Your Thoughts</h1>
+      <p>Write down your feelings, express yourself freely.</p>
+    </header>
+
+    <!-- Journal Entry Section -->
+    <section class="journal-entry">
+      <textarea placeholder="Start writing..."></textarea>
+      <div class="controls">
+        <button class="save-button glow-on-hover">Save Entry</button>
+        <button class="clear-button">Clear</button>
+      </div>
+    </section>
+
+    <!-- Recent Journal Entries Section -->
+    <section class="journal-history">
+      <h2>Your Past Entries</h2>
+      <div class="entries">
+        <div class="entry glass">
+          <h3>October 17, 2024</h3>
+          <p>This is where a brief excerpt from the user's journal entry will appear.</p>
+        </div>
+        <!-- Additional entries can be added dynamically via JS -->
+      </div>
+    </section>
+  </div>
+
+</body>
+</html>
