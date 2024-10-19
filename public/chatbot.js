@@ -13,30 +13,40 @@ userInput.addEventListener('keypress', function (e) {
 // Function to handle sending messages
 sendButton.addEventListener('click', sendMessage);
 
-// Define your Hugging Face API token and model
+// Define your Hugging Face API token and model URL
 const API_TOKEN = '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'; 
 const API_URL = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium';
 
+// Send message to Hugging Face API
 async function sendMessageToAPI(message) {
-  const response = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${API_TOKEN}`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      inputs: {
-        text: message
-      }
-    })
-  });
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${API_TOKEN}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        inputs: {
+          text: message
+        }
+      })
+    });
+    
+    if (!response.ok) {
+      throw new Error(`Error: ${response.statusText}`);
+    }
 
-  const data = await response.json();
-  return data.generated_text;
+    const data = await response.json();
+    return data.generated_text || 'Sorry, I am having trouble responding right now.';
+  } catch (error) {
+    console.error('Error:', error);
+    return 'Something went wrong. Please try again later.';
+  }
 }
 
+// Function to display messages in the chat
 function displayMessage(message, sender) {
-  const chatBox = document.getElementById('chat-box');
   const messageElement = document.createElement('div');
   messageElement.classList.add('chat-message', sender);
   messageElement.innerText = message;
@@ -44,8 +54,8 @@ function displayMessage(message, sender) {
   chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
 }
 
-document.getElementById('send-button').addEventListener('click', async function () {
-  const userInput = document.getElementById('user-input');
+// Main function to send messages
+async function sendMessage() {
   const message = userInput.value.trim();
 
   if (message !== '') {
@@ -53,23 +63,17 @@ document.getElementById('send-button').addEventListener('click', async function 
     displayMessage(message, 'user');
     userInput.value = '';
 
-    // Send user message to API and get response
+    // Get bot response from the API
     const botResponse = await sendMessageToAPI(message);
 
     // Display bot response
     displayMessage(botResponse, 'bot');
   }
-});
+}
 
+// Handle 'Enter' key press as an alternate send
 document.getElementById('user-input').addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
     document.getElementById('send-button').click();
   }
 });
-
-
-// Function to get current time
-function getTime() {
-  const now = new Date();
-  return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-}
