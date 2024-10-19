@@ -82,10 +82,10 @@ function getTime() {
 // Function to generate bot response based on user input
 function generateBotResponse(userMessage) {
   // Keywords categorized by emotion
-  const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated"];
-  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry", "dont feel good"];
-  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life", "kill"];
-  const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken"];
+  const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated", "positive"];
+  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry", "dont feel good", "negative"];
+  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life", "kill", "dying"];
+  const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken", "heartbroken"];
 
   // Bot responses based on detected emotion/tone
   if (containsKeyword(userMessage, positiveKeywords)) {
