@@ -14,7 +14,7 @@ userInput.addEventListener('keypress', function (e) {
 sendButton.addEventListener('click', sendMessage);
 
 // Define your Hugging Face API token and model
-const API_TOKEN = 'your-hugging-face-api-token'; // Replace with your Hugging Face API token
+const API_TOKEN = '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'; 
 const API_URL = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium';
 
 async function sendMessageToAPI(message) {
