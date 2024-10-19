@@ -26,6 +26,10 @@ body {
   transition: background-color 0.4s ease;
 }
 
+.navbar.scrolled {
+  background-color: rgba(0, 0, 0, 1);
+}
+
 .navbar .logo {
   font-size: 2rem;
   color: white;
@@ -45,10 +49,8 @@ body {
   font-weight: 500;
   font-size: 1.1rem;
   text-decoration: none;
-}
-
-.nav-btn.active {
-  color: var(--accent-color);
+  overflow: hidden;
+  padding: 0.5rem 0;
 }
 
 .nav-btn::after {
@@ -67,6 +69,36 @@ body {
 .nav-btn:hover::after {
   transform: scaleX(1);
 }
+
+.nav-btn:hover {
+  color: var(--accent-color);
+}
+
+/* Navbar Responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar.active .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .navbar .nav-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+  }
+}
+
 
 /* Hero Section */
 .values-hero {
