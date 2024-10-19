@@ -36,8 +36,7 @@ body {
   }
 }
 
-/* Sidebar */
-/* Sidebar Styles with Collapsibility */
+/* Sidebar Styles */
 .sidebar {
   width: 250px;
   min-height: 100vh;
@@ -117,10 +116,10 @@ body {
   transform: scale(1.1);
 }
 
-/* Sidebar Collapsed Margin Adjustment for Main Content */
+/* Main Content */
 .main-content {
   flex-grow: 1;
-  padding: 40px;
+  padding: 60px; /* Increased padding for more space */
   transition: margin-left 0.4s ease;
 }
 
@@ -128,6 +127,35 @@ body {
   margin-left: 80px;
 }
 
+header h1 {
+  font-size: 3rem; /* Increased title size */
+  margin-bottom: 20px; /* Added space between title and paragraph */
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #bbb;
+  margin-bottom: 40px; /* Added space after paragraph */
+}
+
+/* Profile Details and Forms */
+.profile-details {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px; /* More space between profile card and security settings */
+}
+
+.profile-card, .security-settings {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #ff00e2;
+  margin-bottom: 20px; /* Added space after subheadings */
+}
 
 /* Form Styling */
 form {
@@ -143,8 +171,8 @@ label {
 input, textarea {
   background: #1a1a3c;
   border: none;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 15px; /* Increased padding for inputs */
+  margin-bottom: 30px; /* More space between inputs */
   color: #fff;
   border-radius: 10px;
 }
@@ -156,36 +184,46 @@ input[type="file"] {
 
 .btn-save {
   background-color: #ff00e2;
-  padding: 15px;
+  padding: 15px 25px; /* Increased button padding */
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 25px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 1.1rem; /* Slightly increased button font size */
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-save:hover {
   background-color: #00a2ff;
   transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
 }
 
 .account-actions {
-  margin-top: 40px;
+  margin-top: 60px; /* More space between sections */
 }
 
 .btn-danger {
   background-color: #ff4444;
-  padding: 15px;
+  padding: 15px 25px;
   border: none;
   color: white;
   cursor: pointer;
   border-radius: 25px;
-  font-size: 1rem;
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .btn-danger:hover {
   background-color: #ff6666;
   transform: scale(1.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
+}
+
+/* Adjustments for responsiveness */
+@media (max-width: 768px) {
+  .profile-details {
+    flex-direction: column;
+    gap: 20px; /* Reduced gap on smaller screens */
+  }
 }
