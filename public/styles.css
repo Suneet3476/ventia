@@ -18,17 +18,17 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #000;
+  background-color: rgba(0, 0, 0, 0.8);
   padding: 1rem 5%;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
-  transition: background 0.5s;
+  transition: background-color 0.4s ease;
 }
 
 .navbar .logo {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: #fff;
   font-weight: 600;
 }
@@ -39,36 +39,57 @@ body {
 }
 
 .nav-btn {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  color: #fff;
-  border: none;
+  position: relative;
+  color: white;
   font-weight: 500;
-  cursor: pointer;
-  transition: background 0.3s, transform 0.3s;
+  font-size: 1rem;
+  text-decoration: none;
+  overflow: hidden;
+  padding: 0.5rem 0;
 }
 
-.nav-btn:hover {
-  background: #00c8ff;
-  transform: scale(1.1);
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: #00c8ff;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-btn:hover::after {
+  transform: scaleX(1);
 }
 
 /* Hero Section */
 .hero {
   height: 100vh;
+  position: relative;
+  background: url('hero-image.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0));
-  backdrop-filter: blur(12px);
-  padding: 2rem;
+  color: white;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .hero-content h1 {
   font-size: 3.5rem;
-  color: #000;
+  margin-bottom: 1rem;
+  z-index: 1;
 }
 
 .highlight {
@@ -82,12 +103,12 @@ body {
   border-radius: 30px;
   color: white;
   font-weight: 600;
-  transition: background 0.3s ease-in-out, transform 0.3s;
+  transition: background-color 0.3s ease, transform 0.3s;
 }
 
 .cta-btn:hover {
   background-color: #00b8e6;
-  transform: scale(1.05);
+  transform: scale(1.1);
 }
 
 /* Features Section */
@@ -99,7 +120,8 @@ body {
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 3rem;
+  gap: 2rem;
+  margin-top: 2rem;
 }
 
 .card {
@@ -107,50 +129,38 @@ body {
   padding: 2rem;
   border-radius: 20px;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition: transform 0.4s, box-shadow 0.4s;
 }
 
 .card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Testimonials Section */
+/* Testimonials */
 .testimonials {
   padding: 4rem 10%;
-  background-color: #f9f9f9;
+  background-color: #fafafa;
 }
 
 .carousel {
   display: flex;
+  gap: 1rem;
   overflow-x: auto;
-  gap: 2rem;
 }
 
 .testimonial {
   min-width: 300px;
-  background: #fff;
   padding: 2rem;
+  background: white;
   border-radius: 15px;
-  animation: fadeIn 1.5s ease;
 }
 
-@keyframes fadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Newsletter Section */
+/* Newsletter */
 .newsletter {
   padding: 4rem 10%;
-  text-align: center;
   background: linear-gradient(135deg, #8c9eff, #b3e5fc);
+  text-align: center;
 }
 
 .newsletter-inputs {
@@ -162,53 +172,12 @@ body {
 
 .email-input {
   padding: 0.8rem;
-  border-radius: 25px;
-  border: 1px solid #ccc;
   width: 60%;
+  border-radius: 25px;
 }
 
 .subscribe-btn {
   padding: 0.8rem 2rem;
-  border-radius: 25px;
-  background-color: #00c8ff;
-  color: #fff;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.subscribe-btn:hover {
-  background-color: #00b8e6;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 1.5rem;
-  background-color: #000;
-  color: #fff;
-}
-
-.presentation {
-  padding: 4rem 10%;
-  background-color: #f9f9f9;
-  text-align: center;
-}
-
-.iframe-container {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* This ensures the iframe maintains a 16:9 aspect ratio */
-  margin-top: 1rem;
-}
-
-.iframe-container iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #00c8ff;
+  color: white;
 }
