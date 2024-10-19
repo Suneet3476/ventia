@@ -2,6 +2,9 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const path = require('path');
+const authRoutes = require('./routes/auth');
+app.use('/api/auth', authRoutes);
+
 
 // Connect to MongoDB
 mongoose.connect('mongodb+srv://<username>:<password>@cluster0.mongodb.net/ventia-db?retryWrites=true&w=majority', {
