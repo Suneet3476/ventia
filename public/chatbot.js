@@ -13,64 +13,60 @@ userInput.addEventListener('keypress', function (e) {
 // Function to handle sending messages
 sendButton.addEventListener('click', sendMessage);
 
-function sendMessage() {
-  const userMessage = userInput.value.trim();
-  
-  if (userMessage !== "") {
-    // Add user message to chat
-    addMessage(userMessage, 'user-message');
-    
-    // Clear the input field
-    userInput.value = "";
-    userInput.focus(); // Refocus on input field for continuous typing
-    
-    // Show bot typing indicator
-    showTypingIndicator();
-    
-    // Simulate bot response after delay
-    setTimeout(() => {
-      removeTypingIndicator();
-      addMessage("Thanks for your input! What else can I assist you with?", 'bot-message');
-    }, 1500);
-  }
+// Define your Hugging Face API token and model
+const API_TOKEN = 'your-hugging-face-api-token'; // Replace with your Hugging Face API token
+const API_URL = 'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium';
+
+async function sendMessageToAPI(message) {
+  const response = await fetch(API_URL, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${API_TOKEN}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      inputs: {
+        text: message
+      }
+    })
+  });
+
+  const data = await response.json();
+  return data.generated_text;
 }
 
-function addMessage(text, className) {
+function displayMessage(message, sender) {
+  const chatBox = document.getElementById('chat-box');
   const messageElement = document.createElement('div');
-  messageElement.classList.add('message', className);
-  messageElement.innerHTML = `
-    <p>${text}</p>
-    <span class="message-time">${getTime()}</span>
-  `;
-  
+  messageElement.classList.add('chat-message', sender);
+  messageElement.innerText = message;
   chatBox.appendChild(messageElement);
-  chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
-  
-  // Delay adding the class for animation
-  setTimeout(() => {
-    messageElement.style.opacity = '1';
-    messageElement.style.transform = 'translateY(0)';
-  }, 100); // Small delay for smooth fade-in
+  chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the bottom
 }
 
-// Function to show bot typing indicator
-function showTypingIndicator() {
-  const typingIndicator = document.createElement('div');
-  typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
-  typingIndicator.innerHTML = `
-    <p>Typing...</p>
-  `;
-  chatBox.appendChild(typingIndicator);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
+document.getElementById('send-button').addEventListener('click', async function () {
+  const userInput = document.getElementById('user-input');
+  const message = userInput.value.trim();
 
-// Function to remove bot typing indicator
-function removeTypingIndicator() {
-  const typingIndicator = document.querySelector('.typing-indicator');
-  if (typingIndicator) {
-    typingIndicator.remove();
+  if (message !== '') {
+    // Display user message
+    displayMessage(message, 'user');
+    userInput.value = '';
+
+    // Send user message to API and get response
+    const botResponse = await sendMessageToAPI(message);
+
+    // Display bot response
+    displayMessage(botResponse, 'bot');
   }
-}
+});
+
+document.getElementById('user-input').addEventListener('keypress', function (e) {
+  if (e.key === 'Enter') {
+    document.getElementById('send-button').click();
+  }
+});
+
 
 // Function to get current time
 function getTime() {
