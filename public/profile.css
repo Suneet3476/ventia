@@ -37,6 +37,7 @@ body {
 }
 
 /* Sidebar Styles */
+/* Sidebar Styles with Collapsibility */
 .sidebar {
   width: 250px;
   min-height: 100vh;
@@ -116,16 +117,17 @@ body {
   transform: scale(1.1);
 }
 
-/* Main Content */
+/* Sidebar Collapsed Margin Adjustment for Main Content */
 .main-content {
   flex-grow: 1;
-  padding: 60px; /* Increased padding for more space */
+  padding: 40px;
   transition: margin-left 0.4s ease;
 }
 
 .sidebar.collapsed ~ .main-content {
   margin-left: 80px;
 }
+
 
 header h1 {
   font-size: 3rem; /* Increased title size */
