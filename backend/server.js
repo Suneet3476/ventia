@@ -7,7 +7,7 @@ app.use('/api/auth', authRoutes);
 
 
 // Connect to MongoDB
-mongoose.connect('mongodb+srv://<username>:<password>@cluster0.mongodb.net/ventia-db?retryWrites=true&w=majority', {
+mongoose.connect('mongodb+srv://49185:49185@cluster0.io3ti.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => {
