@@ -14,34 +14,25 @@ body {
   overflow-x: hidden;
 }
 
-/* Floating Background Animations */
-.floating-elements, .floating-elements-2 {
+/* Background Shapes */
+.background-shapes {
   position: fixed;
-  width: 300px;
-  height: 300px;
-  background: linear-gradient(45deg, rgba(137,6,230,0.8), rgba(255,0,226,0.8));
-  border-radius: 50%;
-  filter: blur(100px);
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  opacity: 0.1;
   z-index: -1;
-  animation: float 10s infinite ease-in-out alternate;
+  animation: background-move 20s infinite linear;
 }
 
-.floating-elements {
-  top: 20%;
-  left: 10%;
-}
-
-.floating-elements-2 {
-  bottom: 10%;
-  right: 15%;
-}
-
-@keyframes float {
+@keyframes background-move {
   from {
-    transform: translateY(-30px);
+    transform: translateX(0);
   }
   to {
-    transform: translateY(30px);
+    transform: translateX(-100px);
   }
 }
 
@@ -54,11 +45,11 @@ body {
   padding: 20px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
-  transition: transform 0.4s ease;
+  transition: all 0.4s ease;
 }
 
 .sidebar.collapsed {
-  transform: translateX(-220px);
+  width: 70px;
 }
 
 .sidebar-header {
@@ -109,30 +100,26 @@ body {
 .main-content {
   flex-grow: 1;
   padding: 40px;
+  transition: margin-left 0.4s ease;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  color: #ff00e2;
+.sidebar.collapsed ~ .main-content {
+  margin-left: 80px;
 }
 
+/* Card and Widget Spacing */
 .dashboard-overview, .widgets {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 40px;
   margin-top: 40px;
 }
 
 .card, .widget {
   background: rgba(255, 255, 255, 0.1);
-  padding: 20px;
+  padding: 30px;
   border-radius: 15px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover, .widget:hover {
-  transform: scale(1.05);
-  box-shadow: 0 10px 30px rgba(255, 0, 226, 0.3);
 }
 
 .card h2, .widget h3 {
@@ -144,14 +131,16 @@ header h1 {
   color: #00a2ff; /* Blue color on hover */
 }
 
+/* Button Glow and Size Adjustments */
 button {
   background: #8906e6;
   color: white;
-  padding: 10px 20px;
+  padding: 15px 25px;
   border: none;
   border-radius: 25px;
   cursor: pointer;
   transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+  font-size: 1rem;
 }
 
 button:hover {
@@ -173,46 +162,40 @@ button:hover {
   bottom: -2px;
   background: linear-gradient(45deg, #8906e6, #ff00e2);
   z-index: -1;
-  filter: blur(20px); /* Reduced glow */
+  filter: blur(15px); /* Reduced glow */
   border-radius: inherit;
 }
 
-/* Animations */
-.animated {
-  opacity: 0;
-  animation: fadeIn 1s forwards;
+.larger-button {
+  padding: 20px 30px; /* Increased size */
 }
 
-.fadeInUp {
-  animation-name: fadeInUp;
+/* Hover Underline Animation */
+.hover-underline-animation {
+  position: relative;
 }
 
-.fadeInDown {
-  animation-name: fadeInDown;
+.hover-underline-animation:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  display: block;
+  margin-top: 5px;
+  background: #00a2ff;
+  transition: width 0.3s;
 }
 
-.delay-1s {
-  animation-delay: 1s;
+.hover-underline-animation:hover:after {
+  width: 100%;
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Pie Chart Section */
+.mood-improvement {
+  margin-top: 60px;
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.mood-improvement h2 {
+  color: #ff00e2;
+  margin-bottom: 20px;
 }
