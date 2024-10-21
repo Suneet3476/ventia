@@ -227,6 +227,7 @@ body {
 }
 
 /* Features Section */
+/* Features Section */
 .features {
   padding: 6rem 10%;
   background-color: var(--dark-bg);
@@ -284,16 +285,16 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
-/* New Hover Effect for Card Titles */
+.card:hover h3 {
+  color: var(--accent-color); /* Blue color on card hover */
+}
+
+/* Card Title */
 .card h3 {
   font-size: 1.7rem;
   color: var(--text-color);
   margin-bottom: 0.8rem;
   transition: color 0.4s ease;
-}
-
-.card h3:hover {
-  color: var(--accent-color); /* Blue color on hover */
 }
 
 .card p {
@@ -329,37 +330,58 @@ body {
 }
 
 /* Testimonials Section */
+/* Testimonials Section */
 .testimonials {
   padding: 6rem 10%;
   background: var(--light-bg);
   position: relative;
   border-radius: 40px 40px 0 0;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
+  overflow: hidden; /* Hide overflow for carousel animation */
 }
 
+/* Carousel Wrapper */
 .carousel {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  perspective: 1000px; /* Enables 3D effect */
+  transform-style: preserve-3d; /* Keeps the 3D effect on child elements */
   gap: 2rem;
-  justify-content: space-around;
+  height: 300px; /* Set a fixed height for the carousel */
+  width: 100%; /* Make sure it spans full width */
 }
 
+/* Individual Testimonial Card */
 .testimonial {
+  flex: 0 0 300px; /* Fix the width of each testimonial */
+  padding: 2rem;
   background: var(--glass-bg);
   border: 1px solid var(--testimonial-border-color);
-  padding: 2rem;
-  border-radius: var(--border-radius);
+  border-radius: 25px; /* Uniform shape for all */
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s, box-shadow 0.5s;
+  position: absolute; /* Positioning for 3D carousel effect */
+  transform-origin: center;
+  opacity: 0.6; /* Start testimonials slightly faded */
+  transform: scale(0.8); /* Scale down the side testimonials */
+  transition: opacity 0.5s, transform 0.5s;
 }
 
-.testimonial:hover {
-  transform: scale(1.05);
-  box-shadow: 0 15px 40px rgba(0, 200, 255, 0.4);
+/* Active Testimonial (Center) */
+.testimonial.active {
+  transform: scale(1.2); /* Larger scale for the center */
+  opacity: 1; /* Full opacity */
+  z-index: 1; /* Bring the active testimonial to the front */
+  box-shadow: 0 15px 40px rgba(0, 200, 255, 0.5); /* Prominent shadow */
 }
 
+/* Testimonial Text */
 .testimonial p {
   color: var(--text-color);
   font-size: 1.2rem;
+  text-align: center;
 }
 
 .testimonial span {
@@ -368,7 +390,44 @@ body {
   color: var(--accent-color);
   margin-top: 0.5rem;
   font-weight: 600;
+  text-align: center;
 }
+
+/* 3D Carousel Animation */
+@keyframes carousel-slide {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Carousel Navigation Buttons */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  padding: 1rem;
+  cursor: pointer;
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.carousel-nav.left {
+  left: 10px;
+}
+
+.carousel-nav.right {
+  right: 10px;
+}
+
+.carousel-nav:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
 
 /* Newsletter Section */
 .newsletter {
