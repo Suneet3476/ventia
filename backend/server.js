@@ -1,23 +1,27 @@
 const express = require('express');
+const path = require('path'); // To serve frontend files
 const fetch = require('node-fetch'); // To make API requests
 const cors = require('cors'); // To allow your frontend to communicate with this backend
 const app = express();
 
 // Middleware
 app.use(express.json());
-app.use(cors()); // Allow all origins (you can restrict this to your frontend domain)
+app.use(cors());
+
+// Serve static files from the public folder
+app.use(express.static(path.join(__dirname, '../public')));
 
 // Route to handle OpenAI API requests
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message; // Get message from the request body
 
   try {
-    const apiKey = 'sk-YOUR_OPENAI_API_KEY'; // Store your OpenAI API key here
+    const apiKey = 'sk-YOUR_OPENAI_API_KEY'; // Replace with your OpenAI API key
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${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}`
+        'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
         model: 'gpt-3.5-turbo',
@@ -31,6 +35,11 @@ app.post('/api/chat', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to connect to OpenAI API' });
   }
+});
+
+// Fallback for serving frontend when a route is not found
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Start server
