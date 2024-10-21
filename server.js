@@ -17,6 +17,10 @@ app.post('/api/chat', async (req, res) => {
 
   try {
     const apiKey = process.env.OPENAI_API_KEY; // Use environment variable here
+    if (!apiKey) {
+      throw new Error('OpenAI API key is missing');
+    }
+
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -30,10 +34,23 @@ app.post('/api/chat', async (req, res) => {
       })
     });
 
+    if (!response.ok) {
+      const errorMessage = `OpenAI API responded with status ${response.status}: ${response.statusText}`;
+      console.error(errorMessage);
+      return res.status(response.status).json({ error: errorMessage });
+    }
+
     const data = await response.json();
+    
+    // Ensure data is as expected
+    if (!data.choices || !data.choices[0].message.content) {
+      throw new Error('Invalid response from OpenAI API');
+    }
+
     res.json({ botMessage: data.choices[0].message.content }); // Send bot response back to frontend
   } catch (error) {
-    res.status(500).json({ error: 'Failed to connect to OpenAI API' });
+    console.error('Error with OpenAI API request:', error); // Log the error details
+    res.status(500).json({ error: 'Failed to connect to OpenAI API. ' + error.message });
   }
 });
 
