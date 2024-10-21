@@ -1,0 +1,5 @@
+Flask==2.3.2             # For the web server
+torch==2.0.1             # PyTorch for running the DialoGPT model
+transformers==4.30.2     # Hugging Face Transformers library
+gunicorn==21.2.0         # For running the app on a production server (e.g., Render)
+
