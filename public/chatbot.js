@@ -14,27 +14,27 @@ userInput.addEventListener('keypress', function (e) {
 sendButton.addEventListener('click', sendMessage);
 
 async function sendMessage() {
-  const userMessage = userInput.value.trim();  // Keeping user message case-sensitive for natural interaction
-  
+  const userMessage = userInput.value.trim();  // Keep user message natural
+
   if (userMessage !== "") {
     // Add user message to chat
     addMessage(userMessage, 'user-message');
-    
+
     // Clear the input field
     userInput.value = "";
-    userInput.focus(); // Refocus on input field for continuous typing
-    
+    userInput.focus(); // Refocus for continuous typing
+
     // Show bot typing indicator
     showTypingIndicator();
-    
+
     // Get bot response from your backend
     try {
-      const botResponse = await fetchBotResponse(userMessage); // Fetch bot response
+      const botResponse = await fetchBotResponse(userMessage);
       removeTypingIndicator();
       addMessage(botResponse, 'bot-message');
     } catch (error) {
       removeTypingIndicator();
-      console.error('Error sending message:', error); // Log more details
+      console.error('Error sending message:', error);
       addMessage("Sorry, I couldn't reach the server. Please try again later.", 'bot-message');
     }
   }
@@ -47,33 +47,28 @@ function addMessage(text, className) {
     <p>${text}</p>
     <span class="message-time">${getTime()}</span>
   `;
-  
+
   chatBox.appendChild(messageElement);
   chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
-  
-  // Delay adding the class for animation
+
   setTimeout(() => {
     messageElement.style.opacity = '1';
     messageElement.style.transform = 'translateY(0)';
-  }, 100); // Small delay for smooth fade-in
+  }, 100); // Small delay for fade-in animation
 }
 
-// Function to show bot typing indicator
 function showTypingIndicator() {
   let typingIndicator = document.querySelector('.typing-indicator');
-  
-  if (!typingIndicator) {  // Ensure we don't create duplicate indicators
+
+  if (!typingIndicator) {
     typingIndicator = document.createElement('div');
     typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
-    typingIndicator.innerHTML = `
-      <p>Typing...</p>
-    `;
+    typingIndicator.innerHTML = `<p>Typing...</p>`;
     chatBox.appendChild(typingIndicator);
     chatBox.scrollTop = chatBox.scrollHeight;
   }
 }
 
-// Function to remove bot typing indicator
 function removeTypingIndicator() {
   const typingIndicator = document.querySelector('.typing-indicator');
   if (typingIndicator) {
@@ -81,16 +76,14 @@ function removeTypingIndicator() {
   }
 }
 
-// Function to get current time
 function getTime() {
   const now = new Date();
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-// Function to call your backend and get the chatbot's response
 async function fetchBotResponse(userMessage) {
   try {
-    const response = await fetch('/api/chat', {  // Corrected endpoint to '/api/chat'
+    const response = await fetch('/message', {  // Updated endpoint to '/message'
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -99,16 +92,16 @@ async function fetchBotResponse(userMessage) {
     });
 
     if (!response.ok) {
-      throw new Error(`Server returned an error: ${response.status} ${response.statusText}`);  // More detailed error
+      throw new Error(`Server returned an error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
-    
-    if (!data.botMessage) {
-      throw new Error('No botMessage in response');
+
+    if (!data.reply) {
+      throw new Error('No "reply" field in the response');
     }
-    
-    return data.botMessage;  // Expecting 'botMessage' as in server.js
+
+    return data.reply;  // Expecting 'reply' as in server.js
   } catch (error) {
     console.error("Error fetching bot response:", error);
     return "Sorry, something went wrong.";
