@@ -4,9 +4,9 @@ import torch
 
 app = Flask(__name__)
 
-# Load the model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-small")  # Using a smaller model
-model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-small")
+# Load the DistilGPT-2 model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("distilgpt2")  # Using DistilGPT-2
+model = AutoModelForCausalLM.from_pretrained("distilgpt2")
 model.eval()
 device = torch.device("cpu")  # Ensure the model runs on CPU
 model.to(device)
@@ -30,7 +30,8 @@ def get_bot_response():
             return jsonify({'error': 'Message too long'}), 400
 
         with torch.no_grad():
-            outputs = model.generate(inputs, max_length=1000, pad_token_id=tokenizer.eos_token_id)
+            # Generate a response with a limited max length for efficiency
+            outputs = model.generate(inputs, max_length=200, pad_token_id=tokenizer.eos_token_id)
 
         bot_message = tokenizer.decode(outputs[:, inputs.shape[-1]:][0], skip_special_tokens=True)
 
@@ -46,4 +47,6 @@ def chatbot():
     return render_template('chatbot.html')
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    import os
+    port = int(os.environ.get('PORT', 5000))  # Use the PORT environment variable or default to 5000
+    app.run(host='0.0.0.0', port=port)
