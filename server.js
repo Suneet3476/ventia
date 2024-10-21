@@ -1,20 +1,22 @@
 const express = require('express');
 const axios = require('axios');
-const path = require('path'); 
-const cors = require('cors'); // Add CORS
+const path = require('path');
+const cors = require('cors');
 
 const app = express();
-
-// Use CORS to allow cross-origin requests
 app.use(cors());
-
 app.use(express.json());
 
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Access the Hugging Face API key from Render environment variable
+// Access the Hugging Face API key directly from the Render environment variable
 const apiKey = process.env.my_api_key;
+
+// Helper function to wait for a specified amount of time
+function wait(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 // API route for handling chatbot requests
 app.post('/message', async (req, res) => {
@@ -28,25 +30,34 @@ app.post('/message', async (req, res) => {
     }
 
     try {
-        const response = await axios.post(
-            'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
-            { inputs: userMessage },
-            {
-                headers: {
-                    Authorization: `Bearer ${apiKey}`,
-                },
-            }
-        );
+        let retryCount = 0;
+        const maxRetries = 3; // Number of retries if the model is still loading
 
-        // Check if the response contains the expected data
-        if (response.data && response.data.generated_text) {
-            const botMessage = response.data.generated_text;
-            console.log("Bot reply:", botMessage);
-            res.json({ reply: botMessage });
-        } else {
-            console.error("No generated_text found in the response");
-            res.json({ reply: "I'm sorry. I didn't understand that." });
+        while (retryCount < maxRetries) {
+            const response = await axios.post(
+                'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
+                { inputs: userMessage },
+                {
+                    headers: {
+                        Authorization: `Bearer ${apiKey}`,
+                    },
+                }
+            );
+
+            if (response.data.generated_text) {
+                const botMessage = response.data.generated_text;
+                console.log("Bot reply:", botMessage);
+                return res.json({ reply: botMessage });
+            } else if (response.data.error && response.data.error.includes('currently loading')) {
+                console.log(`Model is loading, retrying in 5 seconds... (Attempt ${retryCount + 1})`);
+                retryCount++;
+                await wait(5000); // Wait 5 seconds before retrying
+            } else {
+                break;
+            }
         }
+
+        res.json({ reply: "The bot is currently loading. Please try again in a few moments." });
     } catch (error) {
         console.error('Error during API call to Hugging Face:', error.message);
         if (error.response) {
