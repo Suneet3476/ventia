@@ -13,8 +13,8 @@ userInput.addEventListener('keypress', function (e) {
 // Function to handle sending messages
 sendButton.addEventListener('click', sendMessage);
 
-function sendMessage() {
-  const userMessage = userInput.value.trim().toLowerCase();  // Lowercase to make keyword detection easier
+async function sendMessage() {
+  const userMessage = userInput.value.trim();  // Keeping user message case-sensitive for natural interaction
   
   if (userMessage !== "") {
     // Add user message to chat
@@ -27,12 +27,15 @@ function sendMessage() {
     // Show bot typing indicator
     showTypingIndicator();
     
-    // Simulate bot response after delay based on user message
-    setTimeout(() => {
+    // Get bot response from OpenAI API
+    try {
+      const botResponse = await fetchOpenAIResponse(userMessage); // Call OpenAI's API to get response
       removeTypingIndicator();
-      const botResponse = generateBotResponse(userMessage);
       addMessage(botResponse, 'bot-message');
-    }, 1500);
+    } catch (error) {
+      removeTypingIndicator();
+      addMessage("Sorry, I couldn't reach the server. Please try again later.", 'bot-message');
+    }
   }
 }
 
@@ -79,46 +82,24 @@ function getTime() {
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-// Function to generate bot response based on user input
-function generateBotResponse(userMessage) {
-  // Keywords categorized by emotion
-  const positiveKeywords = ["happy", "excited", "good", "great", "joy", "hope", "motivated", "positive"];
-  const negativeKeywords = ["sad", "depressed", "anxiety", "stressed", "overwhelmed", "angry", "dont feel good", "negative"];
-  const suicideKeywords = ["suicide", "i want to die", "kill myself", "die", "end my life", "kill", "dying"];
-  const comfortingKeywords = ["alone", "lonely", "nobody cares", "worthless", "empty", "broken", "heartbroken"];
+// Function to call OpenAI API and get the chatbot's response
+async function fetchOpenAIResponse(userMessage) {
+  const apiKey = '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'; // Replace with your actual OpenAI API key
+  const apiUrl = 'https://api.openai.com/v1/chat/completions';
 
-  // Bot responses based on detected emotion/tone
-  if (containsKeyword(userMessage, positiveKeywords)) {
-    return "I'm glad to hear you're feeling good! Keep that positive energy flowing. 😊 What else would you like to talk about?";
-  }
-  
-  if (containsKeyword(userMessage, negativeKeywords)) {
-    return "I'm so sorry you're feeling this way. It's okay to feel down sometimes, but remember you're not alone. Talking about it might help. What would make things better for you right now?";
-  }
-  
-  if (containsKeyword(userMessage, comfortingKeywords)) {
-    return "It sounds like you're going through something tough, and I'm here for you. Sometimes sharing your feelings can make a world of difference. You are important, and your feelings matter. 💜";
-  }
+  const response = await fetch(apiUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${apiKey}`
+    },
+    body: JSON.stringify({
+      model: 'gpt-3.5-turbo', // You can change this if needed
+      messages: [{ role: 'user', content: userMessage }],
+      max_tokens: 150 // Adjust as per the length of the response you expect
+    })
+  });
 
-  if (containsKeyword(userMessage, suicideKeywords)) {
-    return "Please, take care of yourself. I'm deeply concerned about your well-being. Help is available. I’m alerting emergency services right now. You're never alone. 🌟";
-  }
-  
-  // Default response if no keywords matched
-  return "Thank you for sharing. I’m here to listen and help. Is there anything else on your mind?";
+  const data = await response.json();
+  return data.choices[0].message.content;
 }
-
-// Helper function to detect if any keyword is present in the user message
-function containsKeyword(message, keywordsArray) {
-  return keywordsArray.some(keyword => message.includes(keyword));
-}
-
-document.getElementById('signout-button').addEventListener('click', function () {
-  // Redirect to a blank page with a "Successfully signed out" message
-  document.body.innerHTML = "<div style='color: #fff; text-align: center; font-size: 2rem; margin-top: 50px;'>Successfully signed out</div>";
-  
-  // After 3 seconds, redirect to login.html
-  setTimeout(function () {
-    window.location.href = 'login.html';
-  }, 3000); // 3 second delay
-});
