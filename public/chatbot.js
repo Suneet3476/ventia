@@ -45,6 +45,7 @@ function addMessage(text, className) {
   chatBox.appendChild(messageElement);
   chatBox.scrollTop = chatBox.scrollHeight;
 
+  // Add animation for new message
   setTimeout(() => {
     messageElement.style.opacity = '1';
     messageElement.style.transform = 'translateY(0)';
@@ -87,6 +88,8 @@ async function fetchBotResponse(userMessage) {
     }
 
     const data = await response.json();
+
+    // Check if reply exists in the response
     if (!data.reply) {
       throw new Error('No "reply" field in the response');
     }
