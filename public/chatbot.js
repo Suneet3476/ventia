@@ -90,7 +90,7 @@ function getTime() {
 // Function to call your backend and get the chatbot's response
 async function fetchBotResponse(userMessage) {
   try {
-    const response = await fetch('/message', {  // Updated endpoint
+    const response = await fetch('/api/chat', {  // Corrected endpoint to '/api/chat'
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -104,11 +104,11 @@ async function fetchBotResponse(userMessage) {
 
     const data = await response.json();
     
-    if (!data.reply) {
-      throw new Error('No reply in response');
+    if (!data.botMessage) {
+      throw new Error('No botMessage in response');
     }
     
-    return data.reply;  // Changed to expect 'reply' instead of 'botMessage'
+    return data.botMessage;  // Expecting 'botMessage' as in server.js
   } catch (error) {
     console.error("Error fetching bot response:", error);
     return "Sorry, something went wrong.";
