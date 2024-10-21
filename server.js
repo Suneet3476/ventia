@@ -1,13 +1,17 @@
 const express = require('express');
 const fetch = require('node-fetch'); // To make API requests
 const cors = require('cors'); // To allow your frontend to communicate with this backend
+const path = require('path');
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors()); // Allow all origins (you can restrict this to your frontend domain)
 
-// Route to handle OpenAI API requests
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Route to handle OpenAI API requests (for chatbot.html)
 app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message; // Get message from the request body
 
@@ -33,6 +37,11 @@ app.post('/api/chat', async (req, res) => {
   }
 });
 
-// Start server
+// Catch-all route to serve chatbot.html when '/chatbot' is requested
+app.get('/chatbot', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'chatbot.html'));
+});
+
+// Start server (only needed for API calls)
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
