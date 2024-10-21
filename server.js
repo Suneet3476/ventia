@@ -1,12 +1,17 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');  // Import path to serve static files
 
 const app = express();
 app.use(express.json());
 
+// Serve static files from the 'public' directory
+app.use(express.static(path.join(__dirname, 'public')));
+
 // Access the Hugging Face API key from the environment variable
 const apiKey = process.env.my_api_key;
 
+// API route for handling chatbot requests
 app.post('/message', async (req, res) => {
     const userMessage = req.body.message;
 
@@ -31,6 +36,13 @@ app.post('/message', async (req, res) => {
     }
 });
 
-app.listen(3000, () => {
-    console.log('Server running on port 3000');
+// Route for chatbot.html (optional, if you want a specific route for chatbot page)
+app.get('/chatbot', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'chatbot.html'));  // Serving chatbot.html directly
+});
+
+// Start the server
+const port = process.env.PORT || 3000;  // Use PORT if available, or default to 3000
+app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
 });
