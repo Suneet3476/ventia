@@ -16,7 +16,7 @@ app.post('/api/chat', async (req, res) => {
   const userMessage = req.body.message; // Get message from the request body
 
   try {
-    const apiKey = 'sk-YOUR_OPENAI_API_KEY'; // Replace with your OpenAI API key
+    const apiKey = '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'; // Replace with your OpenAI API key
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
