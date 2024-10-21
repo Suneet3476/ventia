@@ -81,7 +81,10 @@ function getTime() {
 
 async function fetchBotResponse(userMessage) {
   try {
-    const response = await fetch('/message', {
+    // Replace this URL with your deployed Render API URL
+    const apiUrl = 'https://your-render-app-url.onrender.com/message';
+
+    const response = await fetch(apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userMessage })
