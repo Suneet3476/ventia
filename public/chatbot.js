@@ -29,11 +29,12 @@ async function sendMessage() {
     
     // Get bot response from your backend
     try {
-      const botResponse = await fetchOpenAIResponse(userMessage); // Updated function name to match
+      const botResponse = await fetchOpenAIResponse(userMessage); // Fetch bot response
       removeTypingIndicator();
       addMessage(botResponse, 'bot-message');
     } catch (error) {
       removeTypingIndicator();
+      console.error('Error sending message:', error); // Log more details
       addMessage("Sorry, I couldn't reach the server. Please try again later.", 'bot-message');
     }
   }
@@ -59,13 +60,17 @@ function addMessage(text, className) {
 
 // Function to show bot typing indicator
 function showTypingIndicator() {
-  const typingIndicator = document.createElement('div');
-  typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
-  typingIndicator.innerHTML = `
-    <p>Typing...</p>
-  `;
-  chatBox.appendChild(typingIndicator);
-  chatBox.scrollTop = chatBox.scrollHeight;
+  let typingIndicator = document.querySelector('.typing-indicator');
+  
+  if (!typingIndicator) {  // Ensure we don't create duplicate indicators
+    typingIndicator = document.createElement('div');
+    typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
+    typingIndicator.innerHTML = `
+      <p>Typing...</p>
+    `;
+    chatBox.appendChild(typingIndicator);
+    chatBox.scrollTop = chatBox.scrollHeight;
+  }
 }
 
 // Function to remove bot typing indicator
@@ -94,10 +99,15 @@ async function fetchOpenAIResponse(userMessage) {
     });
 
     if (!response.ok) {
-      throw new Error('Server returned an error');
+      throw new Error(`Server returned an error: ${response.status} ${response.statusText}`);  // More detailed error
     }
 
     const data = await response.json();
+    
+    if (!data.botMessage) {
+      throw new Error('No botMessage in response');
+    }
+    
     return data.botMessage;
   } catch (error) {
     console.error("Error fetching OpenAI response:", error);
