@@ -1,21 +1,22 @@
 from flask import Flask, request, jsonify, render_template
-from transformers import AutoModelForCausalLM, AutoTokenizer
-import torch
+import requests
 
 app = Flask(__name__)
 
-# Load the GPT-Neo 125M model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-125M")  # Lighter GPT model
-model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-125M")
-model.eval()
-device = torch.device("cpu")  # Ensure the model runs on CPU
-model.to(device)
+# Hugging Face API settings
+API_URL = "https://api-inference.huggingface.co/models/EleutherAI/gpt-neo-125M"
+headers = {"Authorization": "Bearer YOUR_HUGGINGFACE_API_KEY"}  # Replace with your actual API key
+
+def query_huggingface(payload):
+    try:
+        response = requests.post(API_URL, headers=headers, json=payload)
+        return response.json()
+    except Exception as e:
+        print(f"Error in API request: {e}")
+        return {'error': 'An error occurred while contacting the API.'}
 
 @app.route('/message', methods=['POST'])
 def get_bot_response():
-    # Disable gradients
-    torch.set_grad_enabled(False)
-
     # Get the user's message from the request body
     user_message = request.json.get('message')
 
@@ -23,17 +24,18 @@ def get_bot_response():
         return jsonify({'error': 'No message provided'}), 400
 
     try:
-        # Encode the input message for the model
-        inputs = tokenizer.encode(user_message + tokenizer.eos_token, return_tensors="pt").to(device)
+        # Prepare the payload for the Hugging Face API
+        payload = {"inputs": user_message}
 
-        if inputs.size(1) > 1024:  # Limiting to 1024 tokens
-            return jsonify({'error': 'Message too long'}), 400
+        # Send the request to the Hugging Face API
+        response_data = query_huggingface(payload)
 
-        with torch.no_grad():
-            # Generate a response with a limited max length for efficiency
-            outputs = model.generate(inputs, max_length=200, pad_token_id=tokenizer.eos_token_id)
+        # Check for errors in the API response
+        if 'error' in response_data:
+            return jsonify({'error': response_data['error']}), 500
 
-        bot_message = tokenizer.decode(outputs[:, inputs.shape[-1]:][0], skip_special_tokens=True)
+        # Extract the generated response
+        bot_message = response_data[0]['generated_text']
 
         return jsonify({'reply': bot_message})
 
