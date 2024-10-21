@@ -19,6 +19,7 @@ async function sendMessage() {
   if (userMessage !== "") {
     addMessage(userMessage, 'user-message');
     userInput.value = "";
+    userInput.disabled = true;  // Disable input to prevent multiple requests
     userInput.focus();
     showTypingIndicator();
 
@@ -30,6 +31,9 @@ async function sendMessage() {
       removeTypingIndicator();
       console.error('Error sending message:', error);
       addMessage("Sorry, I couldn't reach the server. Please try again later.", 'bot-message');
+    } finally {
+      userInput.disabled = false;  // Re-enable input after response
+      userInput.focus();
     }
   }
 }
@@ -97,7 +101,13 @@ async function fetchBotResponse(userMessage) {
     return data.reply;
   } catch (error) {
     console.error("Error fetching bot response:", error);
-    return "Sorry, something went wrong.";
+    // More specific error messages for better user feedback
+    if (error.message.includes('Failed to fetch')) {
+      return "Failed to connect to the server. Please check your internet connection.";
+    } else if (error.message.includes('500')) {
+      return "The server encountered an error. Please try again later.";
+    } else {
+      return "Sorry, something went wrong.";
+    }
   }
 }
-
