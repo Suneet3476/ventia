@@ -83,10 +83,8 @@ function getTime() {
 }
 
 // Function to call your backend and get the chatbot's response
-async function fetchBotResponse(userMessage) {
-  const apiUrl = 'https://your-backend-url.com/api/chat'; // Replace with your backend URL
-
-  const response = await fetch(apiUrl, {
+async function fetchOpenAIResponse(userMessage) {
+  const response = await fetch('/api/chat', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -95,5 +93,6 @@ async function fetchBotResponse(userMessage) {
   });
 
   const data = await response.json();
-  return data.botMessage; // Return the message from the backend
+  return data.botMessage;
 }
+
