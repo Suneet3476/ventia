@@ -4,9 +4,9 @@ import torch
 
 app = Flask(__name__)
 
-# Load the DistilGPT-2 model and tokenizer
-tokenizer = AutoTokenizer.from_pretrained("distilgpt2")  # Using DistilGPT-2
-model = AutoModelForCausalLM.from_pretrained("distilgpt2")
+# Load the GPT-Neo 125M model and tokenizer
+tokenizer = AutoTokenizer.from_pretrained("EleutherAI/gpt-neo-125M")  # Lighter GPT model
+model = AutoModelForCausalLM.from_pretrained("EleutherAI/gpt-neo-125M")
 model.eval()
 device = torch.device("cpu")  # Ensure the model runs on CPU
 model.to(device)
