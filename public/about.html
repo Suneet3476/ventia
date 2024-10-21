@@ -11,51 +11,78 @@
     <div class="logo">Ventia</div>
     <ul class="nav-links">
       <li><a class="nav-btn" href="index.html">Home</a></li>
-      <li><a class="nav-btn" href="about.html">About Us</a></li>
+      <li><a class="nav-btn active" href="about.html">About Us</a></li>
       <li><a class="nav-btn" href="values.html">Our Values</a></li>
       <li><a class="nav-btn" href="login.html">Login/Signup</a></li>
     </ul>
   </header>
 
   <section class="about-hero">
-    <h1 class="fade-in-text">About Us</h1>
-    <p class="fade-in-text">Discover how Ventia is revolutionizing emotional well-being with a safe, anonymous platform.</p>
+    <div class="about-hero-content">
+      <h1 class="fade-in-text">About Us</h1>
+      <p class="fade-in-text">Revolutionizing emotional well-being with a safe, anonymous platform.</p>
+    </div>
   </section>
 
+  <!-- Cardholder Layout for Each Section -->
   <section class="about-details">
-    <div class="section-card">
+    <div class="divider"></div> <!-- Divider for clean separation -->
+
+    <!-- Vision Card -->
+    <div class="section-card reveal">
       <div class="text-container">
         <h2>Our Vision</h2>
-        <p>We believe that mental health is the foundation of overall well-being. Through Ventia, we aim to solve SDG 3 – Good Health and Well-being, by providing a platform for emotional support that is accessible and anonymous.</p>
+        <p>We envision a world where emotional well-being is universally recognized, and mental health care is accessible, anonymous, and stigma-free for all.</p>
       </div>
       <div class="image-container">
-        <img src="sdg3.png" alt="SDG 3 Image">
+        <img src="vision-futuristic.jpg" alt="Futuristic Vision">
       </div>
     </div>
 
-    <div class="section-card">
+    <div class="divider"></div>
+
+    <!-- Mission Card with Reverse Layout -->
+    <div class="section-card reverse-card reveal">
       <div class="image-container">
-        <img src="mental-health.jpg" alt="Mental Health Support">
+        <img src="mission.jpg" alt="Mission Image">
       </div>
+      <div class="text-container">
+        <h2>Our Mission</h2>
+        <p>Our mission is to provide an anonymous, secure platform offering emotional support, making mental health care approachable and innovative.</p>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <!-- Story Card -->
+    <div class="section-card reveal">
       <div class="text-container">
         <h2>Our Story</h2>
-        <p>Ventia was born out of a need for a more accessible, stigma-free, and anonymous mental health platform. With mental health concerns on the rise globally, we saw a need to reduce the barriers between people and the help they need.</p>
+        <p>Ventia was created to break the barriers between people and mental health support, ensuring it's accessible to everyone, anywhere.</p>
+      </div>
+      <div class="image-container">
+        <img src="mental-health.jpg" alt="Our Story Image">
       </div>
     </div>
 
-    <div class="section-card">
-      <div class="text-container">
-        <h2>Supporting SDGs</h2>
-        <p>Our goal is to contribute to lowering global suicide rates, raising mental health awareness, and driving home the point that mental health is just as important as physical health.</p>
-      </div>
+    <div class="divider"></div>
+
+    <!-- SDG Support Card with Reverse Layout -->
+    <div class="section-card reverse-card reveal">
       <div class="image-container">
         <img src="support-sdg.jpg" alt="Supporting SDGs">
+      </div>
+      <div class="text-container">
+        <h2>Supporting SDGs</h2>
+        <p>We align with SDG 3: Good Health and Well-being, working to reduce suicide rates and raise mental health awareness globally.</p>
       </div>
     </div>
   </section>
 
   <footer>
-    <p>&copy; 2024 Ventia | All Rights Reserved</p>
+    <div class="footer-content">
+      <p>&copy; 2024 Ventia | All Rights Reserved</p>
+    </div>
   </footer>
 
   <script src="public/scripts.js"></script>
