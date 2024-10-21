@@ -7,14 +7,37 @@
 
 body {
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #eef2f3, #8c4fff);
-  color: #333;
+  background: linear-gradient(135deg, #100d28, #341b6d);
+  color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding-top: 80px;
   overflow: hidden; /* To hide floating objects */
+  position: relative;
+}
+
+/* Background animation */
+.background-animation {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: url('https://www.transparenttextures.com/patterns/asfalt-light.png');
+  opacity: 0.05;
+  z-index: -1;
+  animation: moveBackground 20s infinite linear;
+}
+
+@keyframes moveBackground {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100px);
+  }
 }
 
 /* Navbar */
@@ -22,13 +45,14 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.9);
   padding: 1rem 5%;
   position: fixed;
   width: 100%;
   top: 0;
   z-index: 1000;
   transition: background-color 0.4s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .navbar.scrolled {
@@ -36,13 +60,20 @@ body {
 }
 
 .navbar .logo {
-  font-size: 2rem;
-  color: white;
+  font-size: 2.2rem;
+  color: #ff00e2;
   font-weight: 700;
   letter-spacing: 1px;
   cursor: pointer;
+  transition: color 0.4s ease;
 }
 
+.navbar .logo:hover {
+  color: #ff00e2;
+  text-shadow: 0 0 10px #ff00e2;
+}
+
+/* Navbar Links */
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -50,14 +81,21 @@ body {
 
 .nav-btn {
   position: relative;
-  color: white;
+  color: #fff;
   font-weight: 500;
   font-size: 1.1rem;
   text-decoration: none;
-  overflow: hidden;
   padding: 0.5rem 0;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
+.nav-btn:hover {
+  color: #00c8ff;
+  text-shadow: 0 0 10px #00c8ff;
+  transform: translateY(-3px);
+}
+
+/* Navbar Underline Animation */
 .nav-btn::after {
   content: '';
   position: absolute;
@@ -75,34 +113,6 @@ body {
   transform: scaleX(1);
 }
 
-.nav-btn:hover {
-  color: var(--accent-color);
-}
-
-/* Navbar Responsiveness */
-@media (max-width: 768px) {
-  .nav-links {
-    display: none;
-  }
-
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar.active .nav-links {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 1rem;
-  }
-
-  .navbar .nav-btn {
-    width: 100%;
-    text-align: left;
-    padding: 1rem;
-  }
-}
 /* Navbar Responsiveness */
 @media (max-width: 768px) {
   .nav-links {
@@ -138,19 +148,26 @@ body {
 }
 
 .auth-container {
-  background: white;
-  padding: 60px; /* Enlarged */
+  background: rgba(255, 255, 255, 0.1); /* Added Glassmorphism */
+  padding: 60px;
   border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
-  width: 420px; /* Enlarged */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3); /* Slightly darker shadow */
+  width: 420px;
   position: relative;
+  backdrop-filter: blur(12px); /* Frosted glass effect */
   transition: 0.5s;
+}
+
+.auth-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
 .auth-container h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: var(--primary-color);
+  color: #ff00e2;
+  text-shadow: 0 0 10px #ff00e2;
 }
 
 .input-group {
@@ -160,29 +177,40 @@ body {
 .input-group label {
   display: block;
   margin-bottom: 5px;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .input-group input {
   width: 100%;
   padding: 12px;
   border-radius: 5px;
-  border: 1px solid var(--primary-color);
+  border: 1px solid #ff00e2;
   background: #f0f0f0;
+  color: #333;
+}
+
+.input-group input:focus {
+  border-color: #00c8ff;
+  box-shadow: 0 0 10px #00c8ff;
+  outline: none;
 }
 
 .submit-btn {
   width: 100%;
   padding: 14px;
-  background-color: var(--primary-color);
+  background-color: #ff00e2;
   color: white;
   border: none;
   border-radius: 5px;
   font-size: 1.1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .submit-btn:hover {
-  background-color: var(--accent-color);
+  background-color: #00c8ff;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 200, 255, 0.5);
 }
 
 .toggle-text {
@@ -191,9 +219,14 @@ body {
 }
 
 .toggle-link {
-  color: var(--primary-color);
+  color: #ff00e2;
   cursor: pointer;
   font-weight: 600;
+}
+
+.toggle-link:hover {
+  color: #00c8ff;
+  text-shadow: 0 0 10px #00c8ff;
 }
 
 /* Enlarged Form Size */
@@ -212,6 +245,20 @@ footer {
   position: absolute;
   bottom: 10px;
   width: 100%;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.4);
+}
+
+footer a {
+  color: #ff00e2;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #00c8ff;
+  text-shadow: 0 0 10px #00c8ff;
 }
 
 /* Floating Animated Objects */
@@ -238,7 +285,6 @@ footer {
   opacity: 0.6;
 }
 
-/* Animation for floating objects */
 @keyframes move {
   0% {
     transform: translateY(0px);
@@ -287,8 +333,55 @@ footer {
   }
 }
 
+/* Additional Style Enhancements */
+.auth-container::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, rgba(140, 79, 255, 0.6), transparent);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(30px);
+}
+
+.auth-container::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(0, 200, 255, 0.6), transparent);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(30px);
+}
+
+.floating-object.three {
+  background: radial-gradient(circle, #ff00e2, #ff5f6d);
+  width: 80px;
+  height: 80px;
+  top: 30%;
+  left: 40%;
+  animation: move 6s infinite ease-in-out;
+  opacity: 0.5;
+}
+
+.floating-object.four {
+  background: radial-gradient(circle, #00c8ff, #96c93d);
+  width: 90px;
+  height: 90px;
+  top: 60%;
+  left: 30%;
+  animation: move 8s infinite ease-in-out;
+  opacity: 0.5;
+}
+
 /* Variables */
 :root {
-  --primary-color: #8c4fff;
+  --primary-color: #ff00e2;
   --accent-color: #00c8ff;
 }
