@@ -100,3 +100,4 @@ async function fetchBotResponse(userMessage) {
     return "Sorry, something went wrong.";
   }
 }
+
