@@ -1,5 +1,5 @@
 const express = require('express');
-const axios = require('axios');
+const { HfInference } = require('@huggingface/inference');
 const path = require('path');
 const cors = require('cors');
 
@@ -10,8 +10,11 @@ app.use(express.json());
 // Serve static files from the 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Access the Hugging Face API key directly from the Render environment variable
+// Access the Hugging Face API key directly from the environment variable
 const apiKey = process.env.my_api_key;
+
+// Initialize Hugging Face Inference client
+const hf = new HfInference(apiKey);
 
 // Helper function to wait for a specified amount of time
 function wait(ms) {
@@ -22,7 +25,6 @@ function wait(ms) {
 app.post('/message', async (req, res) => {
     const userMessage = req.body.message;
 
-    // Log the received message for debugging
     console.log("Received user message:", userMessage);
 
     if (!userMessage) {
@@ -30,44 +32,38 @@ app.post('/message', async (req, res) => {
     }
 
     try {
+        const maxRetries = 3;
         let retryCount = 0;
-        const maxRetries = 3; // Number of retries if the model is still loading
 
         while (retryCount < maxRetries) {
-            const response = await axios.post(
-                'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
-                { inputs: userMessage },
-                {
-                    headers: {
-                        Authorization: `Bearer ${apiKey}`,
-                    },
-                }
-            );
+            for await (const chunk of hf.chatCompletionStream({
+                model: 'microsoft/DialoGPT-medium',
+                messages: [{ role: 'user', content: userMessage }],
+                max_tokens: 500,
+            })) {
+                const botMessage = chunk.choices[0]?.delta?.content || "";
 
-            if (response.data.generated_text) {
-                const botMessage = response.data.generated_text;
-                console.log("Bot reply:", botMessage);
-                return res.json({ reply: botMessage });
-            } else if (response.data.error && response.data.error.includes('currently loading')) {
-                console.log(`Model is loading, retrying in 5 seconds... (Attempt ${retryCount + 1})`);
+                if (botMessage) {
+                    console.log("Bot reply:", botMessage);
+                    return res.json({ reply: botMessage });
+                }
+            }
+
+            if (retryCount < maxRetries) {
+                console.log(`Retrying... (${retryCount + 1})`);
                 retryCount++;
                 await wait(5000); // Wait 5 seconds before retrying
-            } else {
-                break;
             }
         }
 
-        res.json({ reply: "The bot is currently loading. Please try again in a few moments." });
+        res.json({ reply: "The bot is currently loading. Please try again later." });
     } catch (error) {
         console.error('Error during API call to Hugging Face:', error.message);
-        if (error.response) {
-            console.error('Hugging Face API response:', error.response.data);
-        }
         res.status(500).send('Error generating response from Hugging Face API.');
     }
 });
 
-// Route for chatbot.html (optional)
+// Route for chatbot.html
 app.get('/chatbot', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'chatbot.html'));
 });
