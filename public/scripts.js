@@ -7,7 +7,6 @@ carousel.addEventListener('wheel', (e) => {
   });
 });
 
-<script>
   document.addEventListener('DOMContentLoaded', function () {
     const carousel = document.querySelector('.carousel');
     const testimonials = document.querySelectorAll('.testimonial');
@@ -35,6 +34,5 @@ carousel.addEventListener('wheel', (e) => {
     // Initial check in case page loads with some scrolling
     handleScroll();
   });
-</script>
 
 
