@@ -23,6 +23,9 @@
   --testimonial-bg: rgba(255, 255, 255, 0.1);
   --testimonial-glow: rgba(255, 200, 0, 0.5);
   --navbar-glow: 0 4px 30px rgba(0, 0, 0, 0.8);
+  /* New Variables */
+  --premium-line: rgba(255, 255, 255, 0.2);
+  --testimonial-border-color: rgba(0, 200, 255, 0.3);
 }
 
 /* Global Styles */
@@ -54,17 +57,16 @@ body {
   top: 0;
   z-index: 1000;
   transition: background-color 0.4s ease;
-  box-shadow: var(--navbar-glow);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .navbar.scrolled {
   background-color: rgba(0, 0, 0, 1);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 
 .navbar .logo {
-  font-size: 2.4rem;
-  color: var(--accent-color);
+  font-size: 2.2rem;
+  color: #ff00e2;
   font-weight: 700;
   letter-spacing: 2px;
   cursor: pointer;
@@ -72,8 +74,73 @@ body {
 }
 
 .navbar .logo:hover {
-  color: var(--primary-color);
-  text-shadow: 0 0 20px var(--primary-color);
+  color: #ff00e2;
+  text-shadow: 0 0 10px #ff00e2;
+}
+
+/* Navbar Links */
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-btn {
+  position: relative;
+  color: #fff;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-decoration: none;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.nav-btn:hover {
+  color: #00c8ff;
+  text-shadow: 0 0 10px #00c8ff;
+  transform: translateY(-3px);
+}
+
+/* Navbar Underline Animation */
+.nav-btn::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--accent-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.nav-btn:hover::after {
+  transform: scaleX(1);
+}
+
+/* Navbar Responsiveness */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar.active .nav-links {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .navbar .nav-btn {
+    width: 100%;
+    text-align: left;
+    padding: 1rem;
+  }
 }
 
 /* Hero Section */
@@ -110,17 +177,19 @@ body {
   animation: fadeIn 2s ease-out;
 }
 
+/* Updated Hero Title for Premium Look */
 .hero-content h1 {
-  font-size: 4.5rem;
+  font-size: 4.8rem;
   margin-bottom: 1.5rem;
   letter-spacing: 3px;
-  text-shadow: 0 0 20px var(--accent-color), 0 0 30px var(--accent-color);
-  animation: slideIn 2.5s ease-out forwards;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Refined shadow */
+  color: var(--primary-color);
 }
 
 .hero-content h1 .highlight {
-  color: var(--primary-color);
-  text-shadow: 0 0 20px var(--primary-color), 0 0 30px var(--accent-color);
+  color: var(--accent-color);
+  text-shadow: none; /* Removed exaggerated glow */
+  font-weight: 600;
 }
 
 .cta-btn {
@@ -184,6 +253,17 @@ body {
   box-shadow: 0 0 10px var(--accent-color);
 }
 
+/* New Line Separator After Features */
+.features::after {
+  content: '';
+  display: block;
+  width: 90%;
+  height: 1px;
+  background-color: var(--premium-line);
+  margin: 2rem auto;
+}
+
+/* Feature Grid and Hover Effect */
 .feature-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -204,16 +284,16 @@ body {
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
 }
 
-.card i {
-  font-size: 3.5rem;
-  color: var(--primary-color);
-  margin-bottom: 1.2rem;
-}
-
+/* New Hover Effect for Card Titles */
 .card h3 {
   font-size: 1.7rem;
   color: var(--text-color);
   margin-bottom: 0.8rem;
+  transition: color 0.4s ease;
+}
+
+.card h3:hover {
+  color: var(--accent-color); /* Blue color on hover */
 }
 
 .card p {
@@ -251,7 +331,7 @@ body {
 /* Testimonials Section */
 .testimonials {
   padding: 6rem 10%;
-  background: var(--gradient-bg);
+  background: var(--light-bg);
   position: relative;
   border-radius: 40px 40px 0 0;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
@@ -260,46 +340,40 @@ body {
 .carousel {
   display: flex;
   gap: 2rem;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  z-index: 1;
+  justify-content: space-around;
 }
 
 .testimonial {
-  min-width: 300px;
-  max-width: 400px;
-  background: var(--testimonial-bg);
+  background: var(--glass-bg);
+  border: 1px solid var(--testimonial-border-color);
   padding: 2rem;
   border-radius: var(--border-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   transition: transform 0.5s, box-shadow 0.5s;
-  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .testimonial:hover {
   transform: scale(1.05);
-  box-shadow: 0 15px 40px var(--testimonial-glow);
+  box-shadow: 0 15px 40px rgba(0, 200, 255, 0.4);
 }
 
 .testimonial p {
-  color: white;
+  color: var(--text-color);
   font-size: 1.2rem;
-  margin-bottom: 1rem;
 }
 
 .testimonial span {
   display: block;
   font-size: 1rem;
-  color: var(--highlight-color);
+  color: var(--accent-color);
   margin-top: 0.5rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* Newsletter Section */
 .newsletter {
   padding: 5rem 10%;
-  background: linear-gradient(135deg, var(--primary-color), #b3e5fc);
+  background: var(--dark-bg);
   text-align: center;
   position: relative;
 }
@@ -307,13 +381,12 @@ body {
 .newsletter h2 {
   font-size: 2.8rem;
   margin-bottom: 1.5rem;
-  color: white;
-  text-shadow: 0 0 10px white;
+  color: var(--accent-color);
 }
 
 .newsletter p {
   font-size: 1.3rem;
-  color: var(--text-color);
+  color: var(--secondary-text-color);
 }
 
 .newsletter-inputs {
@@ -327,7 +400,9 @@ body {
   padding: 0.9rem;
   width: 60%;
   border-radius: 25px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: var(--text-color);
 }
 
 .subscribe-btn {
@@ -337,13 +412,13 @@ body {
   border: none;
   border-radius: 25px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, transform 0.3s;
 }
 
 .subscribe-btn:hover {
   background-color: var(--button-bg-hover);
   transform: scale(1.05);
-  box-shadow: 0 8px 20px var(--cta-glow);
+  box-shadow: 0 8px 20px rgba(0, 200, 255, 0.5);
 }
 
 /* Footer */
