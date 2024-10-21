@@ -27,9 +27,9 @@ async function sendMessage() {
     // Show bot typing indicator
     showTypingIndicator();
     
-    // Get bot response from OpenAI API
+    // Get bot response from your backend
     try {
-      const botResponse = await fetchOpenAIResponse(userMessage); // Call OpenAI's API to get response
+      const botResponse = await fetchBotResponse(userMessage); // Call your backend API to get response
       removeTypingIndicator();
       addMessage(botResponse, 'bot-message');
     } catch (error) {
@@ -82,24 +82,18 @@ function getTime() {
   return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 }
 
-// Function to call OpenAI API and get the chatbot's response
-async function fetchOpenAIResponse(userMessage) {
-  const apiKey = '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'; // Replace with your actual OpenAI API key
-  const apiUrl = 'https://api.openai.com/v1/chat/completions';
+// Function to call your backend and get the chatbot's response
+async function fetchBotResponse(userMessage) {
+  const apiUrl = 'https://your-backend-url.com/api/chat'; // Replace with your backend URL
 
   const response = await fetch(apiUrl, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`
+      'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo', // You can change this if needed
-      messages: [{ role: 'user', content: userMessage }],
-      max_tokens: 150 // Adjust as per the length of the response you expect
-    })
+    body: JSON.stringify({ message: userMessage })
   });
 
   const data = await response.json();
-  return data.choices[0].message.content;
+  return data.botMessage; // Return the message from the backend
 }
