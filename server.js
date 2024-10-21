@@ -23,45 +23,37 @@ function wait(ms) {
 
 // API route for handling chatbot requests
 app.post('/message', async (req, res) => {
-    const userMessage = req.body.message;
+  const userMessage = req.body.message;
 
-    console.log("Received user message:", userMessage);
+  if (!userMessage) {
+    return res.status(400).json({ error: 'No message provided' });
+  }
 
-    if (!userMessage) {
-        return res.status(400).json({ error: 'No message provided' });
+  try {
+    const response = await axios.post(
+      'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
+      { inputs: userMessage },
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+        },
+      }
+    );
+
+    if (response.data.generated_text) {
+      const botMessage = response.data.generated_text;
+      return res.json({ reply: botMessage });
+    } else {
+      console.error('Model did not return expected data:', response.data);
+      return res.status(500).json({ error: 'No response from model' });
     }
-
-    try {
-        const maxRetries = 3;
-        let retryCount = 0;
-
-        while (retryCount < maxRetries) {
-            for await (const chunk of hf.chatCompletionStream({
-                model: 'microsoft/DialoGPT-medium',
-                messages: [{ role: 'user', content: userMessage }],
-                max_tokens: 500,
-            })) {
-                const botMessage = chunk.choices[0]?.delta?.content || "";
-
-                if (botMessage) {
-                    console.log("Bot reply:", botMessage);
-                    return res.json({ reply: botMessage });
-                }
-            }
-
-            if (retryCount < maxRetries) {
-                console.log(`Retrying... (${retryCount + 1})`);
-                retryCount++;
-                await wait(5000); // Wait 5 seconds before retrying
-            }
-        }
-
-        res.json({ reply: "The bot is currently loading. Please try again later." });
-    } catch (error) {
-        console.error('Error during API call to Hugging Face:', error.message);
-        res.status(500).send('Error generating response from Hugging Face API.');
-    }
+  } catch (error) {
+    console.error('Error during API call to Hugging Face:', error.message);
+    console.error('Full error details:', error.response ? error.response.data : error);
+    return res.status(500).send('Error generating response from Hugging Face API.');
+  }
 });
+
 
 // Route for chatbot.html
 app.get('/chatbot', (req, res) => {
