@@ -16,44 +16,35 @@ const apiKey = process.env.my_api_key;
 // Initialize Hugging Face Inference client
 const hf = new HfInference(apiKey);
 
-// Helper function to wait for a specified amount of time
-function wait(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 // API route for handling chatbot requests
 app.post('/message', async (req, res) => {
-  const userMessage = req.body.message;
+    const userMessage = req.body.message;
 
-  if (!userMessage) {
-    return res.status(400).json({ error: 'No message provided' });
-  }
-
-  try {
-    const response = await axios.post(
-      'https://api-inference.huggingface.co/models/microsoft/DialoGPT-medium',
-      { inputs: userMessage },
-      {
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-        },
-      }
-    );
-
-    if (response.data.generated_text) {
-      const botMessage = response.data.generated_text;
-      return res.json({ reply: botMessage });
-    } else {
-      console.error('Model did not return expected data:', response.data);
-      return res.status(500).json({ error: 'No response from model' });
+    if (!userMessage) {
+        return res.status(400).json({ error: 'No message provided' });
     }
-  } catch (error) {
-    console.error('Error during API call to Hugging Face:', error.message);
-    console.error('Full error details:', error.response ? error.response.data : error);
-    return res.status(500).send('Error generating response from Hugging Face API.');
-  }
-});
 
+    try {
+        // Use Hugging Face official library for the API call
+        const result = await hf.chatCompletion({
+            model: 'microsoft/DialoGPT-medium',
+            inputs: userMessage
+        });
+
+        // Check if the response has the expected format
+        if (result && result.generated_text) {
+            const botMessage = result.generated_text;
+            return res.json({ reply: botMessage });
+        } else {
+            console.error('Unexpected response format:', result);
+            return res.status(500).json({ error: 'Unexpected response from Hugging Face API' });
+        }
+
+    } catch (error) {
+        console.error('Error during API call to Hugging Face:', error.message);
+        return res.status(500).send('Error generating response from Hugging Face API.');
+    }
+});
 
 // Route for chatbot.html
 app.get('/chatbot', (req, res) => {
