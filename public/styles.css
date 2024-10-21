@@ -337,44 +337,75 @@ body {
   position: relative;
   border-radius: 40px 40px 0 0;
   box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
-  overflow: hidden; /* Hide overflow for carousel animation */
+  overflow: hidden;
+}
+
+/* Testimonials Heading - Same as Features */
+.testimonials h2 {
+  font-size: 3rem;
+  text-align: center;
+  color: var(--accent-color);
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.testimonials h2::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -15px;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background-color: var(--accent-color);
+  border-radius: 2px;
+  box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Line Separator After Testimonials Section */
+.testimonials::after {
+  content: '';
+  display: block;
+  width: 90%;
+  height: 1px;
+  background-color: var(--premium-line);
+  margin: 2rem auto;
 }
 
 /* Carousel Wrapper */
 .carousel {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  perspective: 1000px; /* Enables 3D effect */
-  transform-style: preserve-3d; /* Keeps the 3D effect on child elements */
   gap: 2rem;
-  height: 300px; /* Set a fixed height for the carousel */
-  width: 100%; /* Make sure it spans full width */
+  justify-content: flex-start;
+  overflow-x: auto; /* Horizontal scrolling */
+  scroll-snap-type: x mandatory; /* Snap to center */
+  padding-bottom: 2rem;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
 }
 
-/* Individual Testimonial Card */
+.carousel::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit browsers */
+}
+
+/* Testimonial Styling */
 .testimonial {
-  flex: 0 0 300px; /* Fix the width of each testimonial */
+  flex: 0 0 300px;
   padding: 2rem;
   background: var(--glass-bg);
   border: 1px solid var(--testimonial-border-color);
-  border-radius: 25px; /* Uniform shape for all */
+  border-radius: var(--border-radius);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transition: transform 0.5s, box-shadow 0.5s;
-  position: absolute; /* Positioning for 3D carousel effect */
-  transform-origin: center;
-  opacity: 0.6; /* Start testimonials slightly faded */
-  transform: scale(0.8); /* Scale down the side testimonials */
-  transition: opacity 0.5s, transform 0.5s;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  scroll-snap-align: center;
+  opacity: 0.6;
+  transform: scale(0.9);
 }
 
-/* Active Testimonial (Center) */
+/* Active Testimonial */
 .testimonial.active {
-  transform: scale(1.2); /* Larger scale for the center */
-  opacity: 1; /* Full opacity */
-  z-index: 1; /* Bring the active testimonial to the front */
-  box-shadow: 0 15px 40px rgba(0, 200, 255, 0.5); /* Prominent shadow */
+  transform: scale(1.1);
+  opacity: 1;
+  box-shadow: 0 15px 40px rgba(0, 200, 255, 0.4);
 }
 
 /* Testimonial Text */
@@ -393,40 +424,6 @@ body {
   text-align: center;
 }
 
-/* 3D Carousel Animation */
-@keyframes carousel-slide {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* Carousel Navigation Buttons */
-.carousel-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.5);
-  border: none;
-  padding: 1rem;
-  cursor: pointer;
-  font-size: 1.5rem;
-  z-index: 10;
-}
-
-.carousel-nav.left {
-  left: 10px;
-}
-
-.carousel-nav.right {
-  right: 10px;
-}
-
-.carousel-nav:hover {
-  background-color: rgba(255, 255, 255, 0.8);
-}
 
 
 /* Newsletter Section */
