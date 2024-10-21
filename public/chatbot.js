@@ -29,7 +29,7 @@ async function sendMessage() {
     
     // Get bot response from your backend
     try {
-      const botResponse = await fetchBotResponse(userMessage); // Call your backend API to get response
+      const botResponse = await fetchOpenAIResponse(userMessage); // Updated function name to match
       removeTypingIndicator();
       addMessage(botResponse, 'bot-message');
     } catch (error) {
@@ -84,15 +84,23 @@ function getTime() {
 
 // Function to call your backend and get the chatbot's response
 async function fetchOpenAIResponse(userMessage) {
-  const response = await fetch('/api/chat', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ message: userMessage })
-  });
+  try {
+    const response = await fetch('/api/chat', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ message: userMessage })
+    });
 
-  const data = await response.json();
-  return data.botMessage;
+    if (!response.ok) {
+      throw new Error('Server returned an error');
+    }
+
+    const data = await response.json();
+    return data.botMessage;
+  } catch (error) {
+    console.error("Error fetching OpenAI response:", error);
+    return "Sorry, something went wrong.";
+  }
 }
-
