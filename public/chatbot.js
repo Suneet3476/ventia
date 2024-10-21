@@ -14,20 +14,14 @@ userInput.addEventListener('keypress', function (e) {
 sendButton.addEventListener('click', sendMessage);
 
 async function sendMessage() {
-  const userMessage = userInput.value.trim();  // Keep user message natural
+  const userMessage = userInput.value.trim();
 
   if (userMessage !== "") {
-    // Add user message to chat
     addMessage(userMessage, 'user-message');
-
-    // Clear the input field
     userInput.value = "";
-    userInput.focus(); // Refocus for continuous typing
-
-    // Show bot typing indicator
+    userInput.focus();
     showTypingIndicator();
 
-    // Get bot response from your backend
     try {
       const botResponse = await fetchBotResponse(userMessage);
       removeTypingIndicator();
@@ -49,17 +43,16 @@ function addMessage(text, className) {
   `;
 
   chatBox.appendChild(messageElement);
-  chatBox.scrollTop = chatBox.scrollHeight; // Auto scroll to bottom
+  chatBox.scrollTop = chatBox.scrollHeight;
 
   setTimeout(() => {
     messageElement.style.opacity = '1';
     messageElement.style.transform = 'translateY(0)';
-  }, 100); // Small delay for fade-in animation
+  }, 100);
 }
 
 function showTypingIndicator() {
   let typingIndicator = document.querySelector('.typing-indicator');
-
   if (!typingIndicator) {
     typingIndicator = document.createElement('div');
     typingIndicator.classList.add('message', 'bot-message', 'typing-indicator');
@@ -83,11 +76,9 @@ function getTime() {
 
 async function fetchBotResponse(userMessage) {
   try {
-    const response = await fetch('/message', {  // Updated endpoint to '/message'
+    const response = await fetch('/message', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: userMessage })
     });
 
@@ -96,12 +87,11 @@ async function fetchBotResponse(userMessage) {
     }
 
     const data = await response.json();
-
     if (!data.reply) {
       throw new Error('No "reply" field in the response');
     }
 
-    return data.reply;  // Expecting 'reply' as in server.js
+    return data.reply;
   } catch (error) {
     console.error("Error fetching bot response:", error);
     return "Sorry, something went wrong.";
