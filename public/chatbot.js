@@ -106,7 +106,7 @@ async function fetchBotResponse(userMessage) {
     console.error("Error fetching bot response:", error);
     // More specific error messages for better user feedback
     if (error.message.includes('Failed to fetch')) {
-      return "Failed to connect to the server. Please check your internet connection.";
+      return "I cannot reach the server right now! But don't worry, I'll be back soon! Take care!!";
     } else if (error.message.includes('500')) {
       return "The server encountered an error. Please try again later.";
     } else {
